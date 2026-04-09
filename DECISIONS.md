@@ -10,6 +10,7 @@
 | Шифрование | Fernet |
 | Логирование | RotatingFileHandler + stdout |
 | Контейнеризация | Docker + docker-compose |
+| Файловые операции | aiofiles (асинхронно) |
 | Rate limiting | slowapi |
 
 ## Структура проекта
@@ -23,7 +24,8 @@
 │ │ └── dependencies.py
 │ ├── api/v1/
 │ │ ├── submit.py
-│ │ └── health.py
+│ │ ├── health.py
+│ │ └── upload.py
 │ ├── models/lead.py
 │ ├── schemas/lead.py
 │ ├── services/
@@ -70,3 +72,8 @@ Docker
 Volume: ./data:/app/data
 
 Healthcheck: curl -f http://localhost:8000/health || exit 1
+
+## Особенности реализации
+- Автоматическое создание папки `data/uploads/` при инициализации БД (`init_db`).
+- Имя загруженного файла: `{uuid4}_{original_name}`.
+- Валидация размера (10 МБ) и расширений (PDF, Word, Excel).

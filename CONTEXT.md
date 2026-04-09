@@ -27,6 +27,10 @@ curl -X POST http://localhost:8000/api/submit \
 curl -X POST http://localhost:8000/api/submit \
   -H "Content-Type: application/json" \
   -d '{"name":"Иван","phone":"+79991234567","email":"ivan@example.com","file":null}'
+
+# Загрузка файла
+curl -X POST http://localhost:8000/api/upload \
+  -F "file=@path/to/your/file.pdf"
 ## Статус реализации
 - [x] Бэкенд готов и протестирован локально.
 - [x] Все эндпоинты (`/health`, `/api/submit`) доступны.
@@ -39,7 +43,7 @@ app/main.py
 
 app/core/config.py, security.py, logging.py, dependencies.py
 
-app/api/v1/submit.py, health.py
+app/api/v1/submit.py, health.py, upload.py
 
 app/models/lead.py
 

@@ -5,7 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from slowapi import _rate_limit_exceeded_handler
 from slowapi.errors import RateLimitExceeded
 from app.core.security import limiter
-from app.api.v1 import submit, health
+from app.api.v1 import submit, health, upload
 from app.core.dependencies import init_db
 from app.worker.retry_worker import worker_loop
 from app.core.logging import logger
@@ -38,6 +38,7 @@ app.add_middleware(
 
 app.include_router(health.router)
 app.include_router(submit.router, prefix="/api")
+app.include_router(upload.router, prefix="/api")
 
 if __name__ == "__main__":
     import uvicorn
