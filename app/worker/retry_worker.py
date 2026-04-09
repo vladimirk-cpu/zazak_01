@@ -25,18 +25,33 @@ async def process_pending_leads():
             
             name = decrypt(lead.name_encrypted)
             phone = decrypt(lead.phone_encrypted)
+            email = decrypt(lead.email_encrypted) if lead.email_encrypted else None
+            file = decrypt(lead.file_encrypted) if lead.file_encrypted else None
             comment = decrypt(lead.comment_encrypted) if lead.comment_encrypted else ""
+            form_type = lead.form_type
 
             lead.attempts += 1
 
             if not lead.max_sent:
-                text = f"Новая заявка!\nИмя: {name}\nТелефон: {phone}\nКомментарий: {comment}"
+                text = f"Новая заявка! ({form_type})\nИмя: {name}\nТелефон: {phone}"
+                if email: text += f"\nEmail: {email}"
+                if file: text += f"\nФайл: {file}"
+                if comment: text += f"\nКомментарий: {comment}"
+                
                 success = await send_to_max(text)
                 if success:
                     lead.max_sent = True
 
             if not lead.amocrm_sent:
-                success = await send_to_amocrm(name, phone, comment)
+                lead_data = {
+                    "name": name,
+                    "phone": phone,
+                    "email": email,
+                    "file": file,
+                    "comment": comment,
+                    "form_type": form_type
+                }
+                success = await send_to_amocrm(lead_data)
                 if success:
                     lead.amocrm_sent = True
 

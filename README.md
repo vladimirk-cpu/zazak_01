@@ -8,9 +8,15 @@
 
 ## Отправка тестовой заявки
 ```bash
+# Малая форма
 curl -X POST http://localhost:8000/api/submit \
   -H "Content-Type: application/json" \
-  -d '{"name":"Тест","phone":"+79991234567","comment":"Тестовая заявка"}'
+  -d '{"phone":"+79991234567"}'
+
+# Большая форма
+curl -X POST http://localhost:8000/api/submit \
+  -H "Content-Type: application/json" \
+  -d '{"name":"Иван","phone":"+79991234567","email":"ivan@example.com","file":null}'
 ```
 
 ## Healthcheck

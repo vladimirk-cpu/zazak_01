@@ -18,10 +18,15 @@ docker-compose up --build
 # Проверка healthcheck
 curl http://localhost:8000/health
 
-# Отправка тестовой заявки
+# Отправка тестовой заявки (Малая форма)
 curl -X POST http://localhost:8000/api/submit \
   -H "Content-Type: application/json" \
-  -d '{"name":"Тест","phone":"+79991234567","comment":"Тестовая заявка"}'
+  -d '{"phone":"+79991234567"}'
+
+# Отправка тестовой заявки (Большая форма)
+curl -X POST http://localhost:8000/api/submit \
+  -H "Content-Type: application/json" \
+  -d '{"name":"Иван","phone":"+79991234567","email":"ivan@example.com","file":null}'
 ## Статус реализации
 - [x] Бэкенд готов и протестирован локально.
 - [x] Все эндпоинты (`/health`, `/api/submit`) доступны.
