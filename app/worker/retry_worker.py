@@ -6,6 +6,7 @@ from app.models.lead import PendingLead
 from app.services.encryption import decrypt
 from app.services.max_client import send_to_max
 from app.services.amocrm_client import send_to_amocrm
+from app.services.email_client import send_email_notification
 from app.core.logging import logger
 
 MAX_ATTEMPTS = 5
@@ -54,6 +55,12 @@ async def process_pending_leads():
                 success = await send_to_amocrm(lead_data)
                 if success:
                     lead.amocrm_sent = True
+                
+                # Best-effort email notification
+                try:
+                    await send_email_notification(lead_data)
+                except Exception as e:
+                    logger.error(f"Failed to send email notification for lead {lead.id}: {e}")
 
             if lead.max_sent and lead.amocrm_sent:
                 logger.info(f"Lead id={lead.id} successfully processed")

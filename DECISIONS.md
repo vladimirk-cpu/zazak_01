@@ -32,7 +32,8 @@
 │ │ ├── max_client.py
 │ │ ├── amocrm_client.py
 │ │ ├── queue_service.py
-│ │ └── encryption.py
+│ │ ├── encryption.py
+│ │ └── email_client.py
 │ └── worker/retry_worker.py
 ├── data/
 ├── requirements.txt

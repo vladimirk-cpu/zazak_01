@@ -49,7 +49,7 @@ app/models/lead.py
 
 app/schemas/lead.py
 
-app/services/max_client.py, amocrm_client.py, queue_service.py, encryption.py
+app/services/max_client.py, amocrm_client.py, queue_service.py, encryption.py, email_client.py
 
 app/worker/retry_worker.py
 

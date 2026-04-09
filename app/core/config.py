@@ -23,6 +23,14 @@ class Settings(BaseSettings):
     LOG_LEVEL: str = "INFO"
     LOG_FILE_PATH: str = "./data/logs"
 
+    # Email notifications
+    MAIL_TO: str = "prombez@egpb.ru"
+    MAIL_FROM: str = "noreply@example.com"
+    SMTP_HOST: str | None = None
+    SMTP_PORT: int | None = None
+    SMTP_USER: str | None = None
+    SMTP_PASSWORD: str | None = None
+
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 
 settings = Settings()
