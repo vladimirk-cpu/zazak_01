@@ -8,6 +8,7 @@
 ## Итерации
 
 ### Итерация 1 — Бэкенд (один мощный сеанс Gemini 3.1 Pro)
+
 - [x] Подготовка артефактов (PLAN, DECISIONS, CONTEXT)
 - [x] Создание FastAPI приложения с Pydantic-схемами (LeadSmallForm, LeadLargeForm)
 - [x] Модель SQLite для очереди `pending_leads` (шифрование, поддержка новых полей: email, file, form_type)
@@ -20,7 +21,7 @@
 - [x] Dockerfile и docker-compose.yml для локальной разработки
 - [x] Healthcheck endpoint `/health`
 - [x] Эндпоинт `POST /api/upload` для загрузки файлов (PDF, Word, Excel) с валидацией и асинхронным аплоадом
-- [x] Сервис email-уведомлений (заглушка) и интеграция в воркер
+- [x] Реальная отправка email-уведомлений через SMTP (aiosmtplib)
 - [x] Обновление артефактов (PLAN, DECISIONS, CONTEXT) по итогу
 
 ### Итерация 2 — Фронтенд (Gemini 3 Flash)

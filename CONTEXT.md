@@ -32,9 +32,9 @@ curl -X POST http://localhost:8000/api/submit \
 curl -X POST http://localhost:8000/api/upload \
   -F "file=@path/to/your/file.pdf"
 ## Статус реализации
-- [x] Бэкенд готов и протестирован локально.
-- [x] Все эндпоинты (`/health`, `/api/submit`) доступны.
-- [x] База данных и логирование настроены в папке `/data`.
+- [x] Бэкенд полностью готов: реализованы малая/большая формы, загрузка файлов и реальная отправка Email уведомлений через SMTP.
+- [x] Все эндпоинты (`/health`, `/api/submit`, `/api/upload`) протестированы.
+- [x] База данных (SQLite) и логирование настроены в папке `/data`.
 
 ## Ожидаемые файлы (Все созданы)
 Dockerfile, docker-compose.yml, requirements.txt, .env.example

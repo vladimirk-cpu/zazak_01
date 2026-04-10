@@ -24,12 +24,12 @@ class Settings(BaseSettings):
     LOG_FILE_PATH: str = "./data/logs"
 
     # Email notifications
-    MAIL_TO: str = "prombez@egpb.ru"
-    MAIL_FROM: str = "noreply@example.com"
-    SMTP_HOST: str | None = None
-    SMTP_PORT: int | None = None
-    SMTP_USER: str | None = None
-    SMTP_PASSWORD: str | None = None
+    MAIL_TO: str
+    MAIL_FROM: str
+    SMTP_HOST: str
+    SMTP_PORT: int
+    SMTP_USER: str
+    SMTP_PASSWORD: str
 
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 

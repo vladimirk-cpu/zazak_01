@@ -11,6 +11,7 @@
 | Логирование | RotatingFileHandler + stdout |
 | Контейнеризация | Docker + docker-compose |
 | Файловые операции | aiofiles (асинхронно) |
+| Email клиент | aiosmtplib (SMTP с TLS) |
 | Rate limiting | slowapi |
 
 ## Структура проекта
