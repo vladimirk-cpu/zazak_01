@@ -4,7 +4,7 @@ from app.core.logging import logger
 
 async def send_to_max(text: str) -> bool:
     if not settings.MAX_BOT_TOKEN or not settings.MAX_CHAT_ID:
-        logger.info(f"Mock MAX Messenger send: {text}")
+        logger.info("Mock MAX Messenger send requested")
         return True
     
     url = f"{settings.MAX_API_URL}/messages"

@@ -12,10 +12,19 @@ router = APIRouter()
 @router.post("/submit")
 @limiter.limit("5/minute")
 async def submit_lead(request: Request, db: AsyncSession = Depends(get_db)):
-    # 1. Get raw body
+    # 1. Get and validate body size to prevent OOM
+    content_length = request.headers.get("Content-Length")
+    if content_length and int(content_length) > 1 * 1024 * 1024: # 1MB limit for JSON
+        logger.warning(f"Rejected submission with excessive body size: {content_length}")
+        raise HTTPException(status_code=413, detail="Request body too large. Max size is 1MB.")
+
     try:
         raw_body = await request.body()
+        if len(raw_body) > 1 * 1024 * 1024:
+            raise HTTPException(status_code=413, detail="Request body too large. Max size is 1MB.")
         body_data = json.loads(raw_body)
+    except HTTPException as e:
+        raise e
     except Exception:
         raise HTTPException(status_code=400, detail="Invalid JSON")
 

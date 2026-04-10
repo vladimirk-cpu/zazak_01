@@ -1,0 +1,15 @@
+.env
+data/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.git
+.gitignore
+.vscode
+.idea
+test_upload.pdf
+test_payload_real.json
+requirements.txt.bak
+app.log
+error.log

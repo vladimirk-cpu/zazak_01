@@ -11,7 +11,7 @@ async def send_to_amocrm(lead_data: dict) -> bool:
     form_type = lead_data.get("form_type", "large")
 
     if not settings.AMOCRM_SUBDOMAIN or not settings.AMOCRM_CLIENT_ID:
-        logger.info(f"Mock AMOCRM send ({form_type}): name='{name}' phone='{phone}' email='{email}' file='{file}'")
+        logger.info(f"Mock AMOCRM send ({form_type}) requested")
         return True
     
     # Real implementation placeholder for AmoCRM API v4

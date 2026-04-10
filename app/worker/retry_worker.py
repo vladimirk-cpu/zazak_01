@@ -22,55 +22,61 @@ async def process_pending_leads():
         leads = result.scalars().all()
 
         for lead in leads:
-            logger.info(f"Processing lead id={lead.id}, attempt={lead.attempts + 1}")
-            
-            name = decrypt(lead.name_encrypted)
-            phone = decrypt(lead.phone_encrypted)
-            email = decrypt(lead.email_encrypted) if lead.email_encrypted else None
-            file = decrypt(lead.file_encrypted) if lead.file_encrypted else None
-            comment = decrypt(lead.comment_encrypted) if lead.comment_encrypted else ""
-            form_type = lead.form_type
-
-            lead.attempts += 1
-
-            if not lead.max_sent:
-                text = f"Новая заявка! ({form_type})\nИмя: {name}\nТелефон: {phone}"
-                if email: text += f"\nEmail: {email}"
-                if file: text += f"\nФайл: {file}"
-                if comment: text += f"\nКомментарий: {comment}"
+            try:
+                logger.info(f"Processing lead id={lead.id}, attempt={lead.attempts + 1}")
                 
-                success = await send_to_max(text)
-                if success:
-                    lead.max_sent = True
+                name = decrypt(lead.name_encrypted)
+                phone = decrypt(lead.phone_encrypted)
+                email = decrypt(lead.email_encrypted) if lead.email_encrypted else None
+                file = decrypt(lead.file_encrypted) if lead.file_encrypted else None
+                comment = decrypt(lead.comment_encrypted) if lead.comment_encrypted else ""
+                form_type = lead.form_type
 
-            if not lead.amocrm_sent:
-                lead_data = {
-                    "name": name,
-                    "phone": phone,
-                    "email": email,
-                    "file": file,
-                    "comment": comment,
-                    "form_type": form_type
-                }
-                success = await send_to_amocrm(lead_data)
-                if success:
-                    lead.amocrm_sent = True
-                
-                # Best-effort email notification
-                try:
-                    await send_email_notification(lead_data)
-                except Exception as e:
-                    logger.error(f"Failed to send email notification for lead {lead.id}: {e}")
+                lead.attempts += 1
 
-            if lead.max_sent and lead.amocrm_sent:
-                logger.info(f"Lead id={lead.id} successfully processed")
-            else:
-                # Exponential backoff: 1 min, 2 min, 4 min, 8 min...
-                delay_minutes = 2 ** (lead.attempts - 1)
-                lead.next_retry_at = datetime.utcnow() + timedelta(minutes=delay_minutes)
-                logger.warning(f"Lead id={lead.id} processing failed. Next retry at {lead.next_retry_at}")
+                if not lead.max_sent:
+                    text = f"Новая заявка! ({form_type})\nИмя: {name}\nТелефон: {phone}"
+                    if email: text += f"\nEmail: {email}"
+                    if file: text += f"\nФайл: {file}"
+                    if comment: text += f"\nКомментарий: {comment}"
+                    
+                    success = await send_to_max(text)
+                    if success:
+                        lead.max_sent = True
 
-            await db.commit()
+                if not lead.amocrm_sent:
+                    lead_data = {
+                        "name": name,
+                        "phone": phone,
+                        "email": email,
+                        "file": file,
+                        "comment": comment,
+                        "form_type": form_type
+                    }
+                    success = await send_to_amocrm(lead_data)
+                    if success:
+                        lead.amocrm_sent = True
+                    
+                    # Best-effort email notification
+                    try:
+                        await send_email_notification(lead_data)
+                    except Exception as e:
+                        logger.error(f"Failed to send email notification for lead {lead.id}: {e}")
+
+                if lead.max_sent and lead.amocrm_sent:
+                    logger.info(f"Lead id={lead.id} successfully processed")
+                else:
+                    # Exponential backoff: 1 min, 2 min, 4 min, 8 min...
+                    delay_minutes = 2 ** (lead.attempts - 1)
+                    lead.next_retry_at = datetime.utcnow() + timedelta(minutes=delay_minutes)
+                    logger.warning(f"Lead id={lead.id} processing failed. Next retry at {lead.next_retry_at}")
+
+                await db.commit()
+            except Exception as e:
+                logger.error(f"Critical error processing lead id={lead.id}: {e}")
+                # We don't commit if exception occurred inside the block, 
+                # but we continue to the next lead.
+                continue
 
 async def worker_loop():
     logger.info("Starting background worker for pending leads...")
