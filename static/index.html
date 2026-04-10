@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Эксперт гарант — экспертиза промбезопасности</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geologica:wght@100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/main.css">
+  <script>document.documentElement.classList.add("js");</script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a href="#" class="logo" aria-label="Эксперт гарант на главную">
+        <img class="logo__img" src="./assets/images/logo-header.svg" alt="" width="194" height="96">
+      </a>
+      <span class="site-header__spacer" aria-hidden="true"></span>
+      <button type="button" class="btn btn--nav" data-open-modal="short">Консультация</button>
+      <button type="button" class="nav-toggle" aria-label="Открыть меню" aria-expanded="false"><span></span></button>
+      <nav class="site-header__nav" aria-label="Основное меню">
+        <div class="nav-links">
+          <a href="#services">Услуги</a>
+          <a href="#about">О компании</a>
+          <a href="#cases">Работы</a>
+          <a href="#contacts">Контакты</a>
+        </div>
+        <div class="nav-contacts">
+          <div class="nav-contact-row">
+            <span class="nav-contact-icon" aria-hidden="true">
+              <img src="./assets/images/icon-circle.svg" alt="" width="20" height="20">
+              <img src="./assets/images/icon-phone.png" alt="" width="20" height="20">
+            </span>
+            <a href="tel:+79200890221">+7(920) 089‑02‑21</a>
+          </div>
+          <div class="nav-contact-row">
+            <span class="nav-contact-icon" aria-hidden="true">
+              <img src="./assets/images/icon-circle.svg" alt="" width="20" height="20">
+              <img src="./assets/images/icon-email.png" alt="" width="20" height="20">
+            </span>
+            <a href="mailto:prombez@egpb.ru">prombez@egpb.ru</a>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="top">
+      <div class="hero__bg" aria-hidden="true">
+        <img src="./assets/images/hero-figma.png" alt="">
+      </div>
+      <div class="container hero__content reveal-on-scroll">
+        <h1 class="hero__title">Экспертиза промбезопасности — без штрафов, простоев и лишних вопросов</h1>
+        <div class="hero__meta">
+          <p class="hero__lead">ЭПБ, техническое диагностирование и освидетельствование ОПО.<br>Стоимость — за 15 минут, договор — за 30. Документы и общение с Ростехнадзором на нас</p>
+          <button type="button" class="btn btn--sm" data-open-modal="short">Узнать стоимость</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats section" id="about">
+      <div class="container">
+        <div class="stats__inner reveal-on-scroll">
+          <div class="stats__big">
+            <p class="stats__num">13</p>
+            <p class="stats__years">лет на рынке</p>
+          </div>
+          <div class="stats__grid">
+            <div class="stats__item stats__item--regions">
+              <div class="stat-item__bar"></div>
+              <p class="stat-item__value">89 регионов</p>
+              <p class="stat-item__hint">включая новые территории</p>
+            </div>
+            <div class="stats__item stats__item--count">
+              <div class="stat-item__bar"></div>
+              <p class="stat-item__value">7 000+</p>
+              <p class="stat-item__hint">экспертиз ежегодно</p>
+            </div>
+            <div class="stats__item stats__item--top">
+              <div class="stat-item__bar"></div>
+              <p class="stat-item__value">ТОП-15</p>
+              <p class="stat-item__hint">в отрасли ЭПБ в РФ</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bento-section section">
+      <div class="container">
+        <h2 class="section-title reveal-on-scroll">Поможем, если…</h2>
+        <div class="bento-grid">
+          <div class="bento-row bento-row--3">
+            <article class="bento-card reveal-on-scroll" tabindex="0">
+              <div class="bento-card__media"><img src="./assets/images/bento-expired.png" alt=""></div>
+              <div class="bento-card__overlay">
+                <div class="bento-card__blur" aria-hidden="true"></div>
+                <h3 class="bento-card__title">Истёк срок эксплуатации оборудования</h3>
+                <div class="bento-card__expand">
+                  <p class="bento-card__detail">Подготовим обоснование продления или замены, согласуем с РТН без остановки производства.</p>
+                </div>
+              </div>
+            </article>
+            <article class="bento-card reveal-on-scroll bento-card--crop-left" tabindex="0">
+              <div class="bento-card__media"><img src="./assets/images/bento-epb.png" alt=""></div>
+              <div class="bento-card__overlay">
+                <div class="bento-card__blur" aria-hidden="true"></div>
+                <h3 class="bento-card__title">Требуется ЭПБ для надзора</h3>
+                <div class="bento-card__expand">
+                  <p class="bento-card__detail">Оформим заключение в объёме, достаточном для проверок и корректного учёта объекта.</p>
+                </div>
+              </div>
+            </article>
+            <article class="bento-card reveal-on-scroll bento-card--crop-tall" tabindex="0">
+              <div class="bento-card__media"><img src="./assets/images/bento-damage.png" alt=""></div>
+              <div class="bento-card__overlay">
+                <div class="bento-card__blur" aria-hidden="true"></div>
+                <h3 class="bento-card__title">Произошло повреждение или авария</h3>
+                <div class="bento-card__expand">
+                  <p class="bento-card__detail">Срочно оценим последствия, дадим рекомендации по восстановлению и допуску к работе.</p>
+                </div>
+              </div>
+            </article>
+          </div>
+          <div class="bento-row bento-row--2">
+            <article class="bento-card reveal-on-scroll" tabindex="0">
+              <div class="bento-card__media"><img src="./assets/images/bento-docs.png" alt=""></div>
+              <div class="bento-card__overlay">
+                <div class="bento-card__blur" aria-hidden="true"></div>
+                <h3 class="bento-card__title">Не хватает технической документации</h3>
+                <div class="bento-card__expand">
+                  <p class="bento-card__detail">Восстановим паспорта, схемы и ведомости под требования норм и надзора.</p>
+                </div>
+              </div>
+            </article>
+            <article class="bento-card reveal-on-scroll" tabindex="0">
+              <div class="bento-card__media"><img src="./assets/images/bento-inspection.png" alt=""></div>
+              <div class="bento-card__overlay">
+                <div class="bento-card__blur" aria-hidden="true"></div>
+                <h3 class="bento-card__title">Нужна плановая проверка состояния объекта</h3>
+                <div class="bento-card__expand">
+                  <p class="bento-card__detail">Проведём диагностику и экспертизу до визита инспекции, чтобы исключить сюрпризы.</p>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="services-section section" id="services">
+      <div class="container">
+        <h2 class="section-title reveal-on-scroll">Услуги в сфере промышленной безопасности</h2>
+        <p class="section-lead reveal-on-scroll">От горелки в котельной до энергоблока АЭС — работаем с объектами I–IV класса опасности</p>
+        <div class="services-grid">
+          <article class="service-card reveal-on-scroll">
+            <div class="service-card__top">
+              <h3 class="service-card__title">Экспертиза промбезопасности</h3>
+              <p class="service-card__text">Проводим ЭПБ технических устройств, зданий и сооружений на ОПО. Готовим заключение и рекомендации по дальнейшей эксплуатации</p>
+            </div>
+            <div class="service-card__pic"><img src="./assets/images/service-expertise.png" alt=""></div>
+            <div class="service-card__bottom">
+              <p class="service-card__price">от 80 000 ₽</p>
+              <button type="button" class="btn btn--service" data-open-modal="long">Оставить заявку</button>
+            </div>
+          </article>
+          <article class="service-card reveal-on-scroll">
+            <div class="service-card__top">
+              <h3 class="service-card__title">Техническое диагностирование</h3>
+              <p class="service-card__text">Обследуем объект, выявляем дефекты, оцениваем техническое состояние и остаточный ресурс</p>
+            </div>
+            <div class="service-card__pic"><img src="./assets/images/service-diagnostics.png" alt=""></div>
+            <div class="service-card__bottom">
+              <p class="service-card__price">от 80 000 ₽</p>
+              <button type="button" class="btn btn--service" data-open-modal="long">Оставить заявку</button>
+            </div>
+          </article>
+          <article class="service-card reveal-on-scroll">
+            <div class="service-card__top">
+              <h3 class="service-card__title">Техническое освидетельствование</h3>
+              <p class="service-card__text">Организуем и проводим освидетельствование оборудования и конструкций в соответствии с нормативной документацией</p>
+            </div>
+            <div class="service-card__pic"><img src="./assets/images/service-inspection.png" alt=""></div>
+            <div class="service-card__bottom">
+              <p class="service-card__price">от 80 000 ₽</p>
+              <button type="button" class="btn btn--service" data-open-modal="long">Оставить заявку</button>
+            </div>
+          </article>
+          <article class="service-card reveal-on-scroll">
+            <div class="service-card__top">
+              <h3 class="service-card__title">Комплексное обследование зданий и сооружений</h3>
+              <p class="service-card__text">Оцениваем фактическое состояние конструкций и выдаём заключение — что эксплуатировать дальше, что усилить, а что менять</p>
+            </div>
+            <div class="service-card__pic"><img src="./assets/images/service-complex-survey.png" alt=""></div>
+            <div class="service-card__bottom">
+              <p class="service-card__price">от 80 000 ₽</p>
+              <button type="button" class="btn btn--service" data-open-modal="long">Оставить заявку</button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="steps-section section">
+      <div class="container">
+        <h2 class="section-title reveal-on-scroll">Как строится работа</h2>
+        <p class="section-lead reveal-on-scroll">Нужны только документы и при необходимости доступ на объект — остальное берём на себя</p>
+        <div class="steps-grid">
+          <div class="steps-row">
+            <article class="step-card reveal-on-scroll step-card--01">
+              <div class="step-card__body">
+                <p class="step-card__num">01</p>
+                <h3 class="step-card__title">Получаем исходные данные</h3>
+                <p class="step-card__text">Вы присылаете документы и описание объекта. Проверяем, уточняем что нужно дополнительно — и сразу говорим, реально ли уложиться в ваши сроки</p>
+              </div>
+              <div class="step-card__visual"><img src="./assets/images/step-01.png" alt=""></div>
+            </article>
+            <article class="step-card reveal-on-scroll step-card--02">
+              <div class="step-card__body">
+                <p class="step-card__num">02</p>
+                <h3 class="step-card__title">Формируем состав работ и стоимость</h3>
+                <p class="step-card__text">Определяем, что именно нужно сделать. Стоимость и сроки — в течение 15 минут после получения данных</p>
+              </div>
+              <div class="step-card__visual"><img src="./assets/images/step-02.png" alt=""></div>
+            </article>
+          </div>
+          <div class="steps-row">
+            <article class="step-card reveal-on-scroll step-card--03">
+              <div class="step-card__body">
+                <p class="step-card__num">03</p>
+                <h3 class="step-card__title">Обследуем и готовим заключение</h3>
+                <p class="step-card__text">Выезжаем на объект, проводим диагностику, расчёты и оформление. Договор — за 30 минут, только реквизиты компании</p>
+              </div>
+              <div class="step-card__visual"><img src="./assets/images/step-03.png" alt=""></div>
+            </article>
+            <article class="step-card reveal-on-scroll step-card--04">
+              <div class="step-card__body">
+                <p class="step-card__num">04</p>
+                <h3 class="step-card__title">Согласование с Ростехнадзором</h3>
+                <p class="step-card__text">Регистрируем результаты экспертизы сами. У нас есть опыт работы со всеми территориальными органами РТН — включая новые регионы</p>
+              </div>
+              <div class="step-card__visual"><img src="./assets/images/step-04.png" alt=""></div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cases-section section" id="cases">
+      <div class="container">
+        <h2 class="section-title section-title--bold reveal-on-scroll">Примеры задач, с которыми к нам обращались</h2>
+        <p class="section-lead reveal-on-scroll">Даже если ситуация нестандартная — определим состав работ, найдём решение и уложимся в сроки</p>
+        <div class="cases-slider reveal-on-scroll">
+          <button type="button" class="cases-slider__btn cases-slider__nav--prev" aria-label="Предыдущий кейс">‹</button>
+          <div class="cases-slider__viewport">
+            <div class="cases-slider__track">
+              <article class="case-card" tabindex="0" role="button" aria-label="Следующий кейс">
+                <div class="case-card__inner">
+                  <header class="case-card__head">
+                    <p class="case-card__tag">СКЛАД ЛВЖ · СТЕЛЛАЖНЫЕ КОНСТРУКЦИИ</p>
+                    <h3 class="case-card__title">«Сносить не нужно» — мы доказали это за 8 дней вместо 14</h3>
+                  </header>
+                  <div class="case-card__block">
+                    <p class="case-card__label">ситуация</p>
+                    <p class="case-card__p">Рухнула стеллажная система. Выяснилось: фундамент залит не по проекту — вместо бетона Б25 какой-то тощий самострой с грунтом. Ростехнадзор дал 2 недели, иначе — запрет эксплуатации и штраф 2 млн руб</p>
+                  </div>
+                  <div class="case-card__block case-card__divider">
+                    <p class="case-card__label">что сделали</p>
+                    <p class="case-card__p">Приехали с толщиномером, обмерили каждую проблемную зону. Не стали требовать переливку фундамента — пересчитали нагрузку с учётом фактического армирования. Оно оказалось лучше, чем думал заказчик</p>
+                  </div>
+                  <div class="case-card__block">
+                    <p class="case-card__label">Результат</p>
+                  </div>
+                  <div class="case-card__tags">
+                    <span class="case-pill">8 дней вместо 14</span>
+                    <span class="case-pill">Снос отменён</span>
+                    <span class="case-pill">Сэкономили 4 млн руб</span>
+                  </div>
+                  <div class="case-card__block">
+                    <p class="case-card__p">Конструкция признана устойчивой при нагрузке до 2 т на стойку. Наши 300 тыс. — слёзы счастья на фоне 4 млн, которые не пришлось потратить</p>
+                  </div>
+                </div>
+              </article>
+              <article class="case-card" tabindex="0" role="button" aria-label="Следующий кейс">
+                <div class="case-card__inner">
+                  <header class="case-card__head">
+                    <p class="case-card__tag">КОТЕЛЬНАЯ · ТРУБОПРОВОДЫ 1992 Г.В.</p>
+                    <h3 class="case-card__title">Ростехнадзор потребовал повторную экспертизу за 5 дней. Мы успели за 4</h3>
+                  </header>
+                  <div class="case-card__block">
+                    <p class="case-card__label">ситуация</p>
+                    <p class="case-card__p">Хлопок на соседней улице — и РТН ввёл тотальную проверку всех котельных региона. Наш заказчик с трубами 1992 г.в. получил требование «ужесточённой» повторной экспертизы. Без неё — штраф 500 тыс. и остановка отопления зимой</p>
+                  </div>
+                  <div class="case-card__block case-card__divider">
+                    <p class="case-card__label">что сделали</p>
+                    <p class="case-card__p">Не переписывали всё с нуля. Взяли наш старый отчёт, наложили на него свежие разъяснения РТН и точечно усилили раздел по компенсации износа. 80% — готовая база, 20% — аналитика под новые требования</p>
+                  </div>
+                  <div class="case-card__block">
+                    <p class="case-card__label">Результат</p>
+                  </div>
+                  <div class="case-card__tags">
+                    <span class="case-pill">4 дня, дедлайн выдержан</span>
+                    <span class="case-pill">Штраф 500 тыс. — мимо</span>
+                  </div>
+                  <div class="case-card__block">
+                    <p class="case-card__p">Взяли +50% за срочность. Заказчик назвал это «подарком судьбы» — и был прав</p>
+                  </div>
+                </div>
+              </article>
+              <article class="case-card" tabindex="0" role="button" aria-label="Следующий кейс">
+                <div class="case-card__inner">
+                  <header class="case-card__head">
+                    <p class="case-card__tag">ТЦ · КРАНЫ-БАЛКИ</p>
+                    <h3 class="case-card__title">Позвонили ночью в пятницу. К понедельнику краны снова работали</h3>
+                  </header>
+                  <div class="case-card__block">
+                    <p class="case-card__label">ситуация</p>
+                    <p class="case-card__p">Заказчик купил дешёвую экспертизу — 200 страниц воды без учёта износа металла. Ростехнадзор нашёл три крана в «предаварийном» состоянии. Штраф 400 тыс., стройка встала</p>
+                  </div>
+                  <div class="case-card__block case-card__divider">
+                    <p class="case-card__label">что сделали</p>
+                    <p class="case-card__p">За выходные пересчитали все узлы. Выяснилось: предыдущий эксперт работал по нормам 1987 года. Применили актуальный расчёт методом конечных элементов — и картина изменилась</p>
+                  </div>
+                  <div class="case-card__block">
+                    <p class="case-card__label">Результат</p>
+                  </div>
+                  <div class="case-card__tags">
+                    <span class="case-pill">72 часа вместо 14 дней</span>
+                    <span class="case-pill">Кран — ещё 2 года</span>
+                    <span class="case-pill">Сэкономили 1,2 млн</span>
+                  </div>
+                  <div class="case-card__block">
+                    <p class="case-card__p">Взяли на 30% дороже «тех парней». Заказчик заплатил из денег, которые сэкономил на неустойке</p>
+                  </div>
+                </div>
+              </article>
+              <article class="case-card" tabindex="0" role="button" aria-label="Следующий кейс">
+                <div class="case-card__inner">
+                  <header class="case-card__head">
+                    <p class="case-card__tag">ГРП · ГАЗОВОЕ ОБОРУДОВАНИЕ</p>
+                    <h3 class="case-card__title">Утром — акт о приостановке. Вечером в пятницу — ГРП снова в работе</h3>
+                  </header>
+                  <div class="case-card__block">
+                    <p class="case-card__label">ситуация</p>
+                    <p class="case-card__p">Срок экспертизы истёк вчера. Утром — акт о приостановке. Штраф 1 млн руб., плюс каждый час простоя цеха — 100 тыс. убытка. Директор сказал: «Делайте что хотите»</p>
+                  </div>
+                  <div class="case-card__block case-card__divider">
+                    <p class="case-card__label">что сделали</p>
+                    <p class="case-card__p">Выпустили предварительное заключение за 1 день — оформили так, чтобы оно имело силу для надзорного органа. Взяли ответственность на себя. Параллельно за 3 дня доделали основной отчёт</p>
+                  </div>
+                  <div class="case-card__block">
+                    <p class="case-card__label">Результат</p>
+                  </div>
+                  <div class="case-card__tags">
+                    <span class="case-pill">24 часа — первое ЗЭПБ</span>
+                    <span class="case-pill">Спасли 6 млн руб</span>
+                    <span class="case-pill">Рассрочка 30/70</span>
+                  </div>
+                  <div class="case-card__block">
+                    <p class="case-card__p">ГРП запустили в пятницу вечером. У заказчика не было денег — сделали рассрочку внутри контракта</p>
+                  </div>
+                </div>
+              </article>
+              <article class="case-card" tabindex="0" role="button" aria-label="Следующий кейс">
+                <div class="case-card__inner">
+                  <header class="case-card__head">
+                    <p class="case-card__tag">ТРУБОПРОВОД НЕФТЕПРОДУКТОВ · Б/У УЧАСТОК</p>
+                    <h3 class="case-card__title">Документов нет, диаметры не те, пришла проверка. Справились за 6 дней</h3>
+                  </header>
+                  <div class="case-card__block">
+                    <p class="case-card__label">ситуация</p>
+                    <p class="case-card__p">Куплен б/у участок трубопровода — документации ноль, диаметры не совпадают с бирками. Монтаж уже начат. Пришла проверка: либо экспертиза за неделю, либо штраф 800 тыс. и уголовка для главного инженера</p>
+                  </div>
+                  <div class="case-card__block case-card__divider">
+                    <p class="case-card__label">что сделали</p>
+                    <p class="case-card__p">Переделали всю схему. Наняли альпинистов-дефектоскопистов, прошли 2 км трассы. Нашли, что на поворотах труба с запасом прочности 30%. Дефекты, которые насчитал уволенный эксперт, — не существовали</p>
+                  </div>
+                  <div class="case-card__block">
+                    <p class="case-card__label">Результат</p>
+                  </div>
+                  <div class="case-card__tags">
+                    <span class="case-pill">6 дней вместо 20</span>
+                    <span class="case-pill">Ресурс — 4 года</span>
+                    <span class="case-pill">Штрафы обнулены</span>
+                  </div>
+                  <div class="case-card__block">
+                    <p class="case-card__p">Заказчик заплатил ровно стоимость предыдущей «левой» экспертизы плюс 10%. И в этот раз всё было по-настоящему</p>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+          <button type="button" class="cases-slider__btn cases-slider__nav--next" aria-label="Следующий кейс">›</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="partners-section section">
+      <div class="container">
+        <h2 class="section-title section-title--bold reveal-on-scroll">Нам доверяют</h2>
+        <div class="partners-grid">
+          <article class="partner-card reveal-on-scroll partner-card--has-caption">
+            <div class="partner-card__logo partner-card__logo--ntek">
+              <img src="./assets/images/partner-ntek.png" alt="" width="165" height="77" loading="lazy">
+            </div>
+            <p class="partner-card__name">НТЭК</p>
+          </article>
+          <article class="partner-card reveal-on-scroll">
+            <div class="partner-card__logo">
+              <img src="./assets/images/partner-rosseti.png" alt="ПАО «Россети»" width="599" height="211" loading="lazy">
+            </div>
+          </article>
+          <article class="partner-card reveal-on-scroll">
+            <div class="partner-card__logo">
+              <img src="./assets/images/partner-kalashnikov.png" alt="Калашников" width="1029" height="264" loading="lazy">
+            </div>
+          </article>
+          <article class="partner-card reveal-on-scroll">
+            <div class="partner-card__logo">
+              <img src="./assets/images/partner-odk.png" alt="ОДК" width="417" height="174" loading="lazy">
+            </div>
+          </article>
+          <article class="partner-card reveal-on-scroll">
+            <div class="partner-card__logo">
+              <img src="./assets/images/partner-rusal.png" alt="РУСАЛ" width="1280" height="689" loading="lazy">
+            </div>
+          </article>
+          <article class="partner-card reveal-on-scroll">
+            <div class="partner-card__logo">
+              <img src="./assets/images/partner-sevmash.png" alt="Севмаш" width="466" height="333" loading="lazy">
+            </div>
+          </article>
+          <article class="partner-card reveal-on-scroll">
+            <div class="partner-card__logo">
+              <img src="./assets/images/partner-nornikel.png" alt="Норникель" width="213" height="130" loading="lazy">
+            </div>
+          </article>
+          <article class="partner-card reveal-on-scroll">
+            <div class="partner-card__logo">
+              <img src="./assets/images/partner-ogk2.png" alt="ОГК-2" width="227" height="145" loading="lazy">
+            </div>
+          </article>
+          <article class="partner-card reveal-on-scroll">
+            <div class="partner-card__logo">
+              <img src="./assets/images/partner-fkp-sverdlov.png" alt="ФКП «Завод имени Я. М. Свердлова»" width="600" height="165" loading="lazy">
+            </div>
+          </article>
+          <article class="partner-card reveal-on-scroll">
+            <div class="partner-card__logo">
+              <img src="./assets/images/partner-tsenki.png" alt="ЦЭНКИ — космодромы России" width="154" height="38" loading="lazy">
+            </div>
+          </article>
+          <article class="partner-card reveal-on-scroll">
+            <div class="partner-card__logo">
+              <img src="./assets/images/partner-oak.png" alt="ОАК — Объединённая авиастроительная корпорация" width="575" height="126" loading="lazy">
+            </div>
+          </article>
+          <article class="partner-card reveal-on-scroll">
+            <div class="partner-card__logo">
+              <img src="./assets/images/partner-uvz.png" alt="Уралвагонзавод" width="1280" height="998" loading="lazy">
+            </div>
+          </article>
+          <article class="partner-card reveal-on-scroll">
+            <div class="partner-card__logo">
+              <img src="./assets/images/partner-forward-energo.png" alt="ФорвардЭнерго" width="1280" height="218" loading="lazy">
+            </div>
+          </article>
+          <article class="partner-card reveal-on-scroll">
+            <div class="partner-card__logo">
+              <img src="./assets/images/partner-kamchatskenergo.png" alt="Камчатскэнерго" width="300" height="55" loading="lazy">
+            </div>
+          </article>
+          <article class="partner-card reveal-on-scroll partner-card--last-row">
+            <div class="partner-card__logo">
+              <img src="./assets/images/partner-t-plus.png" alt="Группа Т Плюс" width="164" height="66" loading="lazy">
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="thanks-section section">
+      <div class="container">
+        <h2 class="section-title section-title--bold reveal-on-scroll">Нас благодарят</h2>
+        <div class="thanks-slider reveal-on-scroll">
+          <button type="button" class="thanks-slider__btn thanks-slider__nav--prev" aria-label="Предыдущее письмо">‹</button>
+          <div class="thanks-slider__viewport">
+            <div class="thanks-slider__track">
+              <button type="button" class="thanks-thumb" data-lightbox-src="./assets/images/thanks-letter-aem.png" data-lightbox-alt="Благодарственное письмо от AEM-Technologies">
+                <img src="./assets/images/thanks-letter-aem.png" alt="Благодарственное письмо от AEM-Technologies" loading="lazy">
+              </button>
+              <button type="button" class="thanks-thumb" data-lightbox-src="./assets/images/thanks-letter-02-rosseti.png" data-lightbox-alt="Благодарственное письмо от ПАО «Россети Кубань»">
+                <img src="./assets/images/thanks-letter-02-rosseti.png" alt="" loading="lazy">
+              </button>
+              <button type="button" class="thanks-thumb" data-lightbox-src="./assets/images/thanks-letter-03-yarensys.png" data-lightbox-alt="Благодарственное письмо от АО «Ярославские Энергетические Системы»">
+                <img src="./assets/images/thanks-letter-03-yarensys.png" alt="" loading="lazy">
+              </button>
+              <button type="button" class="thanks-thumb" data-lightbox-src="./assets/images/thanks-letter-04-kbk.png" data-lightbox-alt="Благодарственное письмо от ООО «КБК энерго»">
+                <img src="./assets/images/thanks-letter-04-kbk.png" alt="" loading="lazy">
+              </button>
+              <button type="button" class="thanks-thumb" data-lightbox-src="./assets/images/thanks-letter-05-alliance.png" data-lightbox-alt="Рекомендательное письмо от ООО «Альянс»">
+                <img src="./assets/images/thanks-letter-05-alliance.png" alt="" loading="lazy">
+              </button>
+              <button type="button" class="thanks-thumb" data-lightbox-src="./assets/images/thanks-letter-06-neotek.png" data-lightbox-alt="Благодарственное письмо от ООО «Неотэк»">
+                <img src="./assets/images/thanks-letter-06-neotek.png" alt="" loading="lazy">
+              </button>
+            </div>
+          </div>
+          <button type="button" class="thanks-slider__btn thanks-slider__nav--next" aria-label="Следующее письмо">›</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="licenses-section section">
+      <div class="container">
+        <h2 class="section-title section-title--bold reveal-on-scroll">Лицензии и подтверждение компетенции</h2>
+        <div class="licenses-slider reveal-on-scroll">
+          <button type="button" class="licenses-slider__btn licenses-slider__nav--prev" aria-label="Предыдущая лицензия">‹</button>
+          <div class="licenses-slider__viewport">
+            <div class="licenses-slider__track">
+              <button type="button" class="license-thumb" data-lightbox-src="./assets/images/license-01.png" data-lightbox-alt="Лицензия 1">
+                <img src="./assets/images/license-01.png" alt="Лицензия — превью 1" loading="lazy">
+              </button>
+              <button type="button" class="license-thumb" data-lightbox-src="./assets/images/license-02.png" data-lightbox-alt="Лицензия 2">
+                <img src="./assets/images/license-02.png" alt="" loading="lazy">
+              </button>
+              <button type="button" class="license-thumb license-thumb--w219" data-lightbox-src="./assets/images/license-03.png" data-lightbox-alt="Лицензия 3">
+                <img src="./assets/images/license-03.png" alt="" loading="lazy">
+              </button>
+              <button type="button" class="license-thumb license-thumb--w214" data-lightbox-src="./assets/images/license-04.png" data-lightbox-alt="Лицензия 4">
+                <img src="./assets/images/license-04.png" alt="" loading="lazy">
+              </button>
+              <button type="button" class="license-thumb" data-lightbox-src="./assets/images/license-06.png" data-lightbox-alt="Лицензия 6">
+                <img src="./assets/images/license-06.png" alt="" loading="lazy">
+              </button>
+              <button type="button" class="license-thumb" data-lightbox-src="./assets/images/license-07.png" data-lightbox-alt="Лицензия 7">
+                <img src="./assets/images/license-07.png" alt="" loading="lazy">
+              </button>
+              <button type="button" class="license-thumb" data-lightbox-src="./assets/images/license-08.png" data-lightbox-alt="Лицензия 8">
+                <img src="./assets/images/license-08.png" alt="" loading="lazy">
+              </button>
+              <button type="button" class="license-thumb license-thumb--w220" data-lightbox-src="./assets/images/license-09.png" data-lightbox-alt="Лицензия 9">
+                <img src="./assets/images/license-09.png" alt="" loading="lazy">
+              </button>
+            </div>
+          </div>
+          <button type="button" class="licenses-slider__btn licenses-slider__nav--next" aria-label="Следующая лицензия">›</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="contacts">
+    <div class="site-footer__grid">
+      <h2 class="site-footer__title reveal-on-scroll">Остались вопросы?</h2>
+      <div class="footer-form-wrap reveal-on-scroll">
+        <form class="footer-form" id="footer-lead-form">
+          <p class="footer-form__title">Оставьте заявку сейчас и получите скидку 10% на все виды работ</p>
+          <p class="footer-form__hint">Оставьте номер телефона — мы свяжемся с вами в ближайшее время.</p>
+          <input class="input" type="tel" name="phone" placeholder="Телефон" autocomplete="tel">
+          <label class="footer-check">
+            <input type="checkbox" name="agree" required>
+            <span>Согласен с <button type="button" class="privacy-policy-link" data-open-privacy aria-haspopup="dialog">политикой конфиденциальности</button></span>
+          </label>
+          <button type="submit" class="btn btn--sm" style="width:100%;background:var(--gradient-cta-v)">Отправить</button>
+        </form>
+      </div>
+      <div class="footer-contacts reveal-on-scroll">
+        <div>
+          <p class="footer-contacts__label">Звоните нам бесплатно</p>
+          <div class="footer-contacts__row">
+            <span class="footer-contacts__icon footer-contacts__icon--phone" aria-hidden="true">
+              <img src="./assets/images/footer-phone-circle-exact.svg" alt="">
+              <img src="./assets/images/footer-phone-glyph-exact.png" alt="">
+            </span>
+            <a href="tel:+79200890221">+7(920) 089‑02‑21</a>
+          </div>
+        </div>
+        <div>
+          <p class="footer-contacts__label">Пишите нам на почту</p>
+          <div class="footer-contacts__row">
+            <span class="footer-contacts__icon footer-contacts__icon--mail" aria-hidden="true">
+              <img src="./assets/images/footer-mail-circle-exact.svg" alt="">
+              <img src="./assets/images/footer-mail-glyph-exact.png" alt="">
+            </span>
+            <a href="mailto:prombez@egpb.ru">prombez@egpb.ru</a>
+          </div>
+        </div>
+        <div>
+          <p class="footer-contacts__label">Адрес офиса</p>
+          <div class="footer-contacts__row">
+            <span class="footer-contacts__icon" aria-hidden="true">
+              <img src="./assets/images/footer-address-circle-exact.svg" alt="">
+              <img src="./assets/images/footer-address-glyph-exact.png" alt="">
+            </span>
+            <span>123423, город Москва, Карамышевская наб., д. 16 к. 1, помещ. 1/1</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <button type="button" class="fab" data-open-modal="short" aria-label="Оставить заявку">
+    <img src="./assets/images/fab-chat.png" width="74" height="74" alt="">
+  </button>
+
+  <dialog id="modal-short" class="modal-dlg" aria-labelledby="modal-short-title">
+    <div class="modal-dlg__panel">
+      <div class="modal-dlg__head">
+        <h2 id="modal-short-title" class="modal-dlg__title">Оставить заявку</h2>
+        <button type="button" class="modal-dlg__close" data-close-modal aria-label="Закрыть">×</button>
+      </div>
+      <p class="modal-dlg__text">Оставьте номер телефона — мы свяжемся с вами в ближайшее время.</p>
+      <form data-form="lead">
+        <input class="input" type="tel" name="phone" placeholder="Телефон" required autocomplete="tel">
+        <label class="footer-check" style="color:var(--color-text-muted);margin-bottom:12px">
+          <input type="checkbox" name="agree" required>
+          <span>Согласен с <button type="button" class="privacy-policy-link" data-open-privacy aria-haspopup="dialog">политикой конфиденциальности</button></span>
+        </label>
+        <button type="submit" class="btn btn--sm" style="background:var(--gradient-cta-v)">Отправить</button>
+      </form>
+    </div>
+  </dialog>
+
+  <dialog id="modal-long" class="modal-dlg modal-dlg--wide" aria-labelledby="modal-long-title">
+    <div class="modal-dlg__panel">
+      <div class="modal-dlg__head">
+        <h2 id="modal-long-title" class="modal-dlg__title">Оставить заявку</h2>
+        <button type="button" class="modal-dlg__close" data-close-modal aria-label="Закрыть">×</button>
+      </div>
+      <p class="modal-dlg__text">Заполните поля ниже — мы свяжемся с вами и уточним детали. Можно прикрепить документ (PDF, DOC до 10 МБ).</p>
+      <form data-form="lead">
+        <input class="input" type="text" name="name" placeholder="Имя" autocomplete="name">
+        <input class="input" type="email" name="email" placeholder="E-mail" autocomplete="email">
+        <input class="input" type="tel" name="phone" placeholder="Телефон" required autocomplete="tel">
+        <input type="file" id="modal-long-file" class="modal-dlg__file" accept=".pdf,.doc,.docx,application/pdf">
+        <label class="modal-dlg__drop" for="modal-long-file">
+          <strong>Прикрепить документ</strong>
+          <span class="modal-dlg__drop-text">Перетащите файл сюда или нажмите для выбора</span>
+          <span class="modal-dlg__drop-file" aria-live="polite"></span>
+        </label>
+        <label class="modal-dlg__check">
+          <input type="checkbox" name="agree" required>
+          <span>Согласен с <button type="button" class="privacy-policy-link" data-open-privacy aria-haspopup="dialog">политикой конфиденциальности</button></span>
+        </label>
+        <button type="submit" class="btn btn--sm" style="background:var(--gradient-cta-v)">Отправить</button>
+      </form>
+    </div>
+  </dialog>
+
+  <dialog id="modal-privacy" class="modal-dlg modal-dlg--privacy" aria-labelledby="modal-privacy-title">
+    <div class="modal-dlg__panel">
+      <div class="modal-dlg__head">
+        <h2 id="modal-privacy-title" class="modal-dlg__title">Политика в отношении обработки персональных данных</h2>
+        <button type="button" class="modal-dlg__close" data-close-modal aria-label="Закрыть">×</button>
+      </div>
+      <div class="modal-dlg__privacy-body privacy-doc">
+        <h3>1. Общие положения</h3>
+        <p>Настоящая политика обработки персональных данных составлена в соответствии с требованиями Федерального закона от 27.07.2006 № 152-ФЗ «О персональных данных» (далее — Закон о персональных данных) и определяет порядок обработки персональных данных и меры по обеспечению безопасности персональных данных, предпринимаемые Михайловым Иваном Сергеевичем (далее — Оператор).</p>
+        <p>1.1. Оператор ставит своей важнейшей целью и условием осуществления своей деятельности соблюдение прав и свобод человека и гражданина при обработке его персональных данных, в том числе защиты прав на неприкосновенность частной жизни, личную и семейную тайну.</p>
+        <p>1.2. Настоящая политика Оператора в отношении обработки персональных данных (далее — Политика) применяется ко всей информации, которую Оператор может получить о посетителях веб-сайта https://thismywebsite.com.</p>
+
+        <h3>2. Основные понятия, используемые в Политике</h3>
+        <p>2.1. Автоматизированная обработка персональных данных — обработка персональных данных с помощью средств вычислительной техники.</p>
+        <p>2.2. Блокирование персональных данных — временное прекращение обработки персональных данных (за исключением случаев, если обработка необходима для уточнения персональных данных).</p>
+        <p>2.3. Веб-сайт — совокупность графических и информационных материалов, а также программ для ЭВМ и баз данных, обеспечивающих их доступность в сети интернет по сетевому адресу https://thismywebsite.com.</p>
+        <p>2.4. Информационная система персональных данных — совокупность содержащихся в базах данных персональных данных и обеспечивающих их обработку информационных технологий и технических средств.</p>
+        <p>2.5. Обезличивание персональных данных — действия, в результате которых невозможно определить без использования дополнительной информации принадлежность персональных данных конкретному Пользователю или иному субъекту персональных данных.</p>
+        <p>2.6. Обработка персональных данных — любое действие (операция) или совокупность действий (операций), совершаемых с использованием средств автоматизации или без использования таких средств с персональными данными, включая сбор, запись, систематизацию, накопление, хранение, уточнение (обновление, изменение), извлечение, использование, передачу (распространение, предоставление, доступ), обезличивание, блокирование, удаление, уничтожение персональных данных.</p>
+        <p>2.7. Оператор — государственный орган, муниципальный орган, юридическое или физическое лицо, самостоятельно или совместно с другими лицами организующие и/или осуществляющие обработку персональных данных, а также определяющие цели обработки персональных данных, состав персональных данных, подлежащих обработке, действия (операции), совершаемые с персональными данными.</p>
+        <p>2.8. Персональные данные — любая информация, относящаяся прямо или косвенно к определенному или определяемому Пользователю веб-сайта https://thismywebsite.com.</p>
+        <p>2.9. Персональные данные, разрешенные субъектом персональных данных для распространения, — персональные данные, доступ неограниченного круга лиц к которым предоставлен субъектом персональных данных путем дачи согласия на обработку персональных данных, разрешенных субъектом персональных данных для распространения в порядке, предусмотренном Законом о персональных данных (далее — персональные данные, разрешенные для распространения).</p>
+        <p>2.10. Пользователь — любой посетитель веб-сайта https://thismywebsite.com.</p>
+        <p>2.11. Предоставление персональных данных — действия, направленные на раскрытие персональных данных определенному лицу или определенному кругу лиц.</p>
+        <p>2.12. Распространение персональных данных — любые действия, направленные на раскрытие персональных данных неопределенному кругу лиц (передача персональных данных) или на ознакомление с персональными данными неограниченного круга лиц, в том числе обнародование персональных данных в средствах массовой информации, размещение в информационно-телекоммуникационных сетях или предоставление доступа к персональным данным каким-либо иным способом.</p>
+        <p>2.13. Трансграничная передача персональных данных — передача персональных данных на территорию иностранного государства органу власти иностранного государства, иностранному физическому или иностранному юридическому лицу.</p>
+        <p>2.14. Уничтожение персональных данных — любые действия, в результате которых персональные данные уничтожаются безвозвратно с невозможностью дальнейшего восстановления содержания персональных данных в информационной системе персональных данных и/или уничтожаются материальные носители персональных данных.</p>
+
+        <h3>3. Основные права и обязанности Оператора</h3>
+        <p class="privacy-doc__sub">3.1. Оператор имеет право:</p>
+        <ul>
+          <li>получать от субъекта персональных данных достоверную информацию и/или документы, содержащие персональные данные;</li>
+          <li>в случае отзыва субъектом персональных данных согласия на обработку персональных данных, а также направления обращения с требованием о прекращении обработки персональных данных Оператор вправе продолжить обработку персональных данных без согласия субъекта персональных данных при наличии оснований, указанных в Законе о персональных данных;</li>
+          <li>самостоятельно определять состав и перечень мер, необходимых и достаточных для обеспечения выполнения обязанностей, предусмотренных Законом о персональных данных и принятыми в соответствии с ним нормативными правовыми актами, если иное не предусмотрено Законом о персональных данных или другими федеральными законами.</li>
+        </ul>
+        <p class="privacy-doc__sub">3.2. Оператор обязан:</p>
+        <ul>
+          <li>предоставлять субъекту персональных данных по его просьбе информацию, касающуюся обработки его персональных данных;</li>
+          <li>организовывать обработку персональных данных в порядке, установленном действующим законодательством РФ;</li>
+          <li>отвечать на обращения и запросы субъектов персональных данных и их законных представителей в соответствии с требованиями Закона о персональных данных;</li>
+          <li>сообщать в уполномоченный орган по защите прав субъектов персональных данных по запросу этого органа необходимую информацию в течение 10 дней с даты получения такого запроса;</li>
+          <li>публиковать или иным образом обеспечивать неограниченный доступ к настоящей Политике в отношении обработки персональных данных;</li>
+          <li>принимать правовые, организационные и технические меры для защиты персональных данных от неправомерного или случайного доступа к ним, уничтожения, изменения, блокирования, копирования, предоставления, распространения персональных данных, а также от иных неправомерных действий в отношении персональных данных;</li>
+          <li>прекратить передачу (распространение, предоставление, доступ) персональных данных, прекратить обработку и уничтожить персональные данные в порядке и случаях, предусмотренных Законом о персональных данных;</li>
+          <li>исполнять иные обязанности, предусмотренные Законом о персональных данных.</li>
+        </ul>
+
+        <h3>4. Основные права и обязанности субъектов персональных данных</h3>
+        <p class="privacy-doc__sub">4.1. Субъекты персональных данных имеют право:</p>
+        <ul>
+          <li>получать информацию, касающуюся обработки его персональных данных, за исключением случаев, предусмотренных федеральными законами. Сведения предоставляются субъекту персональных данных Оператором в доступной форме, и в них не должны содержаться персональные данные, относящиеся к другим субъектам персональных данных, за исключением случаев, когда имеются законные основания для раскрытия таких персональных данных. Перечень информации и порядок ее получения установлен Законом о персональных данных;</li>
+          <li>требовать от оператора уточнения его персональных данных, их блокирования или уничтожения в случае, если персональные данные являются неполными, устаревшими, неточными, незаконно полученными или не являются необходимыми для заявленной цели обработки, а также принимать предусмотренные законом меры по защите своих прав;</li>
+          <li>выдвигать условие предварительного согласия при обработке персональных данных в целях продвижения на рынке товаров, работ и услуг;</li>
+          <li>на отзыв согласия на обработку персональных данных, а также на направление требования о прекращении обработки персональных данных;</li>
+          <li>обжаловать в уполномоченный орган по защите прав субъектов персональных данных или в судебном порядке неправомерные действия или бездействие Оператора при обработке его персональных данных;</li>
+          <li>на осуществление иных прав, предусмотренных законодательством РФ.</li>
+        </ul>
+        <p class="privacy-doc__sub">4.2. Субъекты персональных данных обязаны:</p>
+        <ul>
+          <li>предоставлять Оператору достоверные данные о себе;</li>
+          <li>сообщать Оператору об уточнении (обновлении, изменении) своих персональных данных.</li>
+        </ul>
+        <p>4.3. Лица, передавшие Оператору недостоверные сведения о себе, либо сведения о другом субъекте персональных данных без согласия последнего, несут ответственность в соответствии с законодательством РФ.</p>
+
+        <h3>5. Принципы обработки персональных данных</h3>
+        <p>5.1. Обработка персональных данных осуществляется на законной и справедливой основе.</p>
+        <p>5.2. Обработка персональных данных ограничивается достижением конкретных, заранее определенных и законных целей. Не допускается обработка персональных данных, несовместимая с целями сбора персональных данных.</p>
+        <p>5.3. Не допускается объединение баз данных, содержащих персональные данные, обработка которых осуществляется в целях, несовместимых между собой.</p>
+        <p>5.4. Обработке подлежат только персональные данные, которые отвечают целям их обработки.</p>
+        <p>5.5. Содержание и объем обрабатываемых персональных данных соответствуют заявленным целям обработки. Не допускается избыточность обрабатываемых персональных данных по отношению к заявленным целям их обработки.</p>
+        <p>5.6. При обработке персональных данных обеспечивается точность персональных данных, их достаточность, а в необходимых случаях и актуальность по отношению к целям обработки персональных данных. Оператор принимает необходимые меры и/или обеспечивает их принятие по удалению или уточнению неполных или неточных данных.</p>
+        <p>5.7. Хранение персональных данных осуществляется в форме, позволяющей определить субъекта персональных данных, не дольше, чем этого требуют цели обработки персональных данных, если срок хранения персональных данных не установлен федеральным законом, договором, стороной которого, выгодоприобретателем или поручителем по которому является субъект персональных данных. Обрабатываемые персональные данные уничтожаются либо обезличиваются по достижении целей обработки или в случае утраты необходимости в достижении этих целей, если иное не предусмотрено федеральным законом.</p>
+
+        <h3>6. Цели обработки персональных данных</h3>
+        <div class="privacy-doc__table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Цель обработки</th>
+                <th>Персональные данные</th>
+                <th>Правовые основания</th>
+                <th>Виды обработки персональных данных</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>информирование Пользователя посредством отправки электронных писем; обработка обращений, направленных через формы на сайте</td>
+                <td>фамилия, имя, отчество; электронный адрес; номера телефонов</td>
+                <td>договоры, заключаемые между оператором и субъектом персональных данных; согласие субъекта персональных данных на обработку его персональных данных</td>
+                <td>сбор, запись, систематизация, накопление, хранение, уничтожение и обезличивание персональных данных; отправка информационных писем на адрес электронной почты</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>7. Условия обработки персональных данных</h3>
+        <p>7.1. Обработка персональных данных осуществляется с согласия субъекта персональных данных на обработку его персональных данных.</p>
+        <p>7.2. Обработка персональных данных необходима для достижения целей, предусмотренных международным договором Российской Федерации или законом, для осуществления возложенных законодательством Российской Федерации на оператора функций, полномочий и обязанностей.</p>
+        <p>7.3. Обработка персональных данных необходима для осуществления правосудия, исполнения судебного акта, акта другого органа или должностного лица, подлежащих исполнению в соответствии с законодательством Российской Федерации об исполнительном производстве.</p>
+        <p>7.4. Обработка персональных данных необходима для исполнения договора, стороной которого либо выгодоприобретателем или поручителем по которому является субъект персональных данных, а также для заключения договора по инициативе субъекта персональных данных или договора, по которому субъект персональных данных будет являться выгодоприобретателем или поручителем.</p>
+        <p>7.5. Обработка персональных данных необходима для осуществления прав и законных интересов оператора или третьих лиц либо для достижения общественно значимых целей при условии, что при этом не нарушаются права и свободы субъекта персональных данных.</p>
+        <p>7.6. Осуществляется обработка персональных данных, доступ неограниченного круга лиц к которым предоставлен субъектом персональных данных либо по его просьбе (далее — общедоступные персональные данные).</p>
+        <p>7.7. Осуществляется обработка персональных данных, подлежащих опубликованию или обязательному раскрытию в соответствии с федеральным законом.</p>
+
+        <h3>8. Порядок сбора, хранения, передачи и других видов обработки персональных данных</h3>
+        <p>Безопасность персональных данных, которые обрабатываются Оператором, обеспечивается путем реализации правовых, организационных и технических мер, необходимых для выполнения в полном объеме требований действующего законодательства в области защиты персональных данных.</p>
+        <p>8.1. Оператор обеспечивает сохранность персональных данных и принимает все возможные меры, исключающие доступ к персональным данным неуполномоченных лиц.</p>
+        <p>8.2. Персональные данные Пользователя никогда, ни при каких условиях не будут переданы третьим лицам, за исключением случаев, связанных с исполнением действующего законодательства либо в случае, если субъектом персональных данных дано согласие Оператору на передачу данных третьему лицу для исполнения обязательств по гражданско-правовому договору.</p>
+        <p>8.3. В случае выявления неточностей в персональных данных, Пользователь может актуализировать их самостоятельно, путем направления Оператору уведомление на адрес электронной почты Оператора privacy@thismywebsite.com с пометкой «Актуализация персональных данных».</p>
+        <p>8.4. Срок обработки персональных данных определяется достижением целей, для которых были собраны персональные данные, если иной срок не предусмотрен договором или действующим законодательством. Пользователь может в любой момент отозвать свое согласие на обработку персональных данных, направив Оператору уведомление посредством электронной почты на электронный адрес Оператора privacy@thismywebsite.com с пометкой «Отзыв согласия на обработку персональных данных».</p>
+        <p>8.5. Вся информация, которая собирается сторонними сервисами, в том числе платежными системами, средствами связи и другими поставщиками услуг, хранится и обрабатывается указанными лицами (Операторами) в соответствии с их Пользовательским соглашением и Политикой конфиденциальности. Субъект персональных данных обязан самостоятельно ознакомиться с указанными документами. Оператор не несёт ответственности за действия третьих лиц, в том числе указанных в настоящем пункте поставщиков услуг.</p>
+        <p>8.6. Установленные субъектом персональных данных запреты на передачу (кроме предоставления доступа), а также на обработку или условия обработки (кроме получения доступа) персональных данных, разрешенных для распространения, не действуют в случаях обработки персональных данных в государственных, общественных и иных публичных интересах, определенных законодательством РФ.</p>
+        <p>8.7. Оператор при обработке персональных данных обеспечивает конфиденциальность персональных данных.</p>
+        <p>8.8. Оператор осуществляет хранение персональных данных в форме, позволяющей определить субъекта персональных данных, не дольше, чем этого требуют цели обработки персональных данных, если срок хранения персональных данных не установлен федеральным законом, договором, стороной которого, выгодоприобретателем или поручителем по которому является субъект персональных данных.</p>
+        <p>8.9. Условием прекращения обработки персональных данных может являться достижение целей обработки персональных данных, истечение срока действия согласия субъекта персональных данных, отзыв согласия субъектом персональных данных или требование о прекращении обработки персональных данных, а также выявление неправомерной обработки персональных данных.</p>
+
+        <h3>9. Перечень действий, производимых Оператором с полученными персональными данными</h3>
+        <p>9.1. Оператор осуществляет сбор, запись, систематизацию, накопление, хранение, уточнение (обновление, изменение), извлечение, использование, передачу (распространение, предоставление, доступ), обезличивание, блокирование, удаление и уничтожение персональных данных.</p>
+        <p>9.2. Оператор осуществляет автоматизированную обработку персональных данных с получением и/или передачей полученной информации по информационно-телекоммуникационным сетям или без таковой.</p>
+
+        <h3>10. Трансграничная передача персональных данных</h3>
+        <p>10.1. Оператор до начала осуществления деятельности по трансграничной передаче персональных данных обязан уведомить уполномоченный орган по защите прав субъектов персональных данных о своем намерении осуществлять трансграничную передачу персональных данных (такое уведомление направляется отдельно от уведомления о намерении осуществлять обработку персональных данных).</p>
+        <p>10.2. Оператор до подачи вышеуказанного уведомления обязан получить от органов власти иностранного государства, иностранных физических лиц, иностранных юридических лиц, которым планируется трансграничная передача персональных данных, соответствующие сведения.</p>
+
+        <h3>11. Конфиденциальность персональных данных</h3>
+        <p>Оператор и иные лица, получившие доступ к персональным данным, обязаны не раскрывать третьим лицам и не распространять персональные данные без согласия субъекта персональных данных, если иное не предусмотрено федеральным законом.</p>
+
+        <h3>12. Заключительные положения</h3>
+        <p>12.1. Пользователь может получить любые разъяснения по интересующим вопросам, касающимся обработки его персональных данных, обратившись к Оператору с помощью электронной почты privacy@thismywebsite.com.</p>
+        <p>12.2. В данном документе будут отражены любые изменения политики обработки персональных данных Оператором. Политика действует бессрочно до замены ее новой версией.</p>
+        <p>12.3. Актуальная версия Политики в свободном доступе расположена в сети Интернет по адресу https://thismywebsite.com/privacy/.</p>
+
+        <p class="privacy-doc__note">Текст сформирован по образцу конструктора Tilda (<a href="https://tilda.cc/ru/privacy-generator/" rel="noopener noreferrer" target="_blank">tilda.cc/ru/privacy-generator</a>). Замените данные оператора, адреса сайта и контакты на ваши и при необходимости согласуйте документ с юристом.</p>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog id="lightbox" class="lightbox-dlg" aria-label="Просмотр документа">
+    <button type="button" class="lightbox-dlg__close" data-close-lightbox aria-label="Закрыть">×</button>
+    <div class="lightbox-dlg__inner">
+      <img class="lightbox-dlg__img" src="" alt="">
+    </div>
+  </dialog>
+
+  <script src="./js/main.js"></script>
+</body>
+</html>
