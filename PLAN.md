@@ -22,6 +22,8 @@
 - [x] Healthcheck endpoint `/health`
 - [x] Эндпоинт `POST /api/upload` для загрузки файлов (PDF, Word, Excel) с валидацией и асинхронным аплоадом
 - [x] Реальная отправка email-уведомлений через SMTP (aiosmtplib)
+- [x] Интеграция фронтенда: привязка форм, обработка отправки, лоадеры
+- [x] Security Hardening: защита от Path Traversal, ограничение CORS, лимиты Pydantic, очистка логов
 - [x] Обновление артефактов (PLAN, DECISIONS, CONTEXT) по итогу
 
 ### Итерация 2 — Фронтенд (Gemini 3 Flash)

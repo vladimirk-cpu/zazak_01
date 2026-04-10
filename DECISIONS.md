@@ -79,3 +79,14 @@ Healthcheck: curl -f http://localhost:8000/health || exit 1
 - Автоматическое создание папки `data/uploads/` при инициализации БД (`init_db`).
 - Имя загруженного файла: `{uuid4}_{original_name}`.
 - Валидация размера (10 МБ) и расширений (PDF, Word, Excel).
+- Имя файла очищается через `os.path.basename()` (защита от Path Traversal).
+- Прямое чтение `contents = await file.read()` для гарантии записи всех байт.
+
+## Безопасность (Hardening)
+- **CORS**: Ограничен белый список доменов (BASE_URL + localhost).
+- **Rate Limiting**: 5 запросов в минуту на отправку форм (slowapi).
+- **Body Size**: Лимит 1 МБ на JSON-тело запроса (защита от OOM).
+- **Pydantic Hardening**: Поля имеют `max_length` для защиты БД от спама длинными строками.
+- **Privacy**: Персональные данные (ПДн) исключены из логов во всех сервисах.
+- **Stability**: Воркер обрабатывает каждый лид в изолированном блоке `try...except`.
+- **Docker**: Использование `.dockerignore` для исключения секретов из образа.
