@@ -6,7 +6,7 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - ./data:/app/data
+      - ${DATA_DIR:-./data}:/app/data
       - ./.env:/app/.env
     env_file:
       - .env

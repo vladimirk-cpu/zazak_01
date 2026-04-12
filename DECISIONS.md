@@ -5,7 +5,7 @@
 |-----------|-------|
 | Бэкенд | FastAPI |
 | Фронтенд | HTML/CSS/JS |
-| База данных | SQLite (persistent volume) |
+| База данных | SQLite (путь через DATA_DIR) |
 | Очередь | SQLite + in-memory retry |
 | Шифрование | Fernet |
 | Логирование | RotatingFileHandler + stdout |
@@ -65,13 +65,13 @@ AMOCRM_FORM_TYPE_FIELD_ID=123456
 
 RECAPTCHA_SECRET_KEY=xxx
 RATELIMIT_DEFAULT=5/minute
-DATABASE_URL=sqlite+aiosqlite:///./data/app.db
+DATABASE_URL=sqlite+aiosqlite:///{DATA_DIR}/app.db
 LOG_LEVEL=INFO
-LOG_FILE_PATH=/app/data/logs
+LOG_FILE_PATH={DATA_DIR}/logs
 Docker
 Образ: python:3.10-slim
 
-Volume: ./data:/app/data
+Volume: $DATA_DIR:/app/data
 
 Healthcheck: curl -f http://localhost:8000/health || exit 1
 

@@ -4,6 +4,9 @@ import uuid
 import aiofiles
 from app.core.logging import logger
 
+from app.core.config import settings
+from pathlib import Path
+
 router = APIRouter()
 
 MAX_FILE_SIZE = 10 * 1024 * 1024  # 10 MB
@@ -14,7 +17,7 @@ ALLOWED_MIME_TYPES = [
     "application/vnd.ms-excel",
     "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
 ]
-UPLOAD_DIR = "./data/uploads"
+UPLOAD_DIR = Path(settings.DATA_DIR) / "uploads"
 
 @router.post("/upload")
 async def upload_file(file: UploadFile = File(...)):

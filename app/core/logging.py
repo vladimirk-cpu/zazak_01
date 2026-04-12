@@ -5,7 +5,6 @@ from app.core.config import settings
 
 def setup_logging():
     log_dir = settings.LOG_FILE_PATH
-    os.makedirs(log_dir, exist_ok=True)
 
     logger = logging.getLogger("app")
     logger.setLevel(getattr(logging, settings.LOG_LEVEL.upper(), logging.INFO))
