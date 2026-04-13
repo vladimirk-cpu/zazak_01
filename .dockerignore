@@ -8,6 +8,8 @@ __pycache__/
 .gitignore
 .vscode
 .idea
+venv/
+.venv/
 test_upload.pdf
 test_payload_real.json
 requirements.txt.bak
