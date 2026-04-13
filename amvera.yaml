@@ -9,10 +9,3 @@ run:
   command: uvicorn app.main:app --host 0.0.0.0 --port $PORT
   persistenceMount: /data
   containerPort: 8000
-  env:
-    - name: DATA_DIR
-      value: /data
-    - name: ENVIRONMENT
-      value: production
-    - name: BASE_URL
-      value: https://expertgarant-vladimirkli.amvera.io
