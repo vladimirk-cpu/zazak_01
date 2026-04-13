@@ -1,8 +1,0 @@
-meta:
-  environment: python
-run:
-  persistenceMount: /data
-  containerPort: 8000
-  env:
-    - name: DATA_DIR
-      value: /data
