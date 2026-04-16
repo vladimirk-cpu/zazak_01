@@ -795,6 +795,15 @@
         const result = await submitLead(submitData);
         
         alert("Заявка успешно отправлена!");
+        
+        if (typeof ym !== 'undefined') {
+            if (submitData.form_type === 'small') {
+                ym(108573733, 'reachGoal', 'form_small');
+            } else if (submitData.form_type === 'large') {
+                ym(108573733, 'reachGoal', 'form_large');
+            }
+        }
+
         form.reset();
         
         // Сброс визуального состояния файла (если есть)
