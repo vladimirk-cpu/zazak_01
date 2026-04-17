@@ -802,6 +802,7 @@
             } else if (submitData.form_type === 'large') {
                 ym(108573733, 'reachGoal', 'form_large');
             }
+            ym(108573733, 'reachGoal', 'zayavka');
         }
 
         form.reset();
