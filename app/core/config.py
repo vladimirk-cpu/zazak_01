@@ -16,6 +16,7 @@ class Settings(BaseSettings):
     AMOCRM_SUBDOMAIN: str = ""
     AMOCRM_CLIENT_ID: str = ""
     AMOCRM_CLIENT_SECRET: str = ""
+    AMOCRM_LONG_TERM_TOKEN: str = ""
     AMOCRM_PIPELINE_ID: int = 0
     AMOCRM_STATUS_ID: int = 0
     AMOCRM_FORM_TYPE_FIELD_ID: int = 0
