@@ -1,4 +1,37 @@
 (function () {
+  // ---- Инициализация маски телефона ----
+  if (typeof Inputmask !== 'undefined') {
+    document.querySelectorAll('input[type="tel"]').forEach(input => {
+      Inputmask({
+        mask: '+7 (999) 999-99-99',
+        showMaskOnHover: false,
+        showMaskOnFocus: true,
+        clearIncomplete: true,
+        removeMaskOnSubmit: false,
+        placeholder: '_'
+      }).mask(input);
+    });
+  }
+
+  function normalizePhone(phone) {
+    if (!phone) return phone;
+    // Удаляем все нецифровые символы
+    let digits = phone.replace(/\D/g, '');
+    // Если номер начинается с 8, заменяем на 7
+    if (digits.startsWith('8')) {
+        digits = '7' + digits.slice(1);
+    }
+    // Если номер начинается с 7 или 9 (без кода страны), добавляем +7
+    if (digits.length === 10 && (digits.startsWith('9') || digits.startsWith('7'))) {
+        digits = '7' + digits;
+    }
+    // Итоговый формат: +7XXXXXXXXXX
+    if (digits.length === 11 && digits.startsWith('7')) {
+        return '+' + digits;
+    }
+    return phone;
+  }
+
   const navToggle = document.querySelector(".nav-toggle");
   const navPanel = document.querySelector(".site-header__nav");
   if (navToggle && navPanel) {
@@ -753,10 +786,11 @@
 
       const isLarge = !!form.querySelector('[name="name"]');
       const formData = new FormData(form);
-      const phone = formData.get("phone");
+      const rawPhone = formData.get("phone");
+      const phone = normalizePhone(rawPhone);
       
-      if (!phone) {
-        alert("Пожалуйста, укажите номер телефона");
+      if (!phone || phone.length !== 12) {
+        alert("Пожалуйста, введите корректный номер телефона");
         return;
       }
 
