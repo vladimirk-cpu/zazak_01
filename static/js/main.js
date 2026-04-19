@@ -2,20 +2,40 @@
   function initPhoneMasks() {
     const phoneInputs = document.querySelectorAll('input[type="tel"]');
     if (typeof Inputmask === 'undefined') return;
+
+    // Определяем правило: первая цифра кода (после +7) должна быть только 9
+    Inputmask.extendDefinitions({
+      'f': {
+        validator: "[9]",
+        cardinality: 1
+      }
+    });
+
     phoneInputs.forEach(input => {
       Inputmask({
-        mask: '+7 (999) 999-99-99',
+        mask: '+7 (f99) 999-99-99',
         clearMaskOnLostFocus: true,
         clearIncomplete: true,
         showMaskOnHover: false,
         showMaskOnFocus: true,
+        onBeforeMask: function (value, opts) {
+          // Если вставляется номер, начинающийся с +7 или 8, обрезаем префикс
+          return value.replace(/^(\+7|8)/, '');
+        },
+        onKeyDown: function (e, buffer, opts) {
+          const input = e.target;
+          // Если курсор в начале кода (позиция 4 после "+7 (") и нажата 8 или 7 — игнорируем
+          if (input.selectionStart === 4 && (e.key === '8' || e.key === '7')) {
+            e.preventDefault();
+          }
+        },
         oncomplete: function () {
           input.classList.remove('phone-error');
           removePhoneErrorMessage(input);
         },
         onincomplete: function () {
           input.classList.add('phone-error');
-          showPhoneErrorMessage(input, 'Введите полный номер телефона (10 цифр)');
+          showPhoneErrorMessage(input, 'Введите корректный мобильный номер (начинается с 9)');
         }
       }).mask(input);
     });
