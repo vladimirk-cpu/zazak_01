@@ -2416,6 +2416,10 @@ html.js .reveal-on-scroll.is-visible {
     transform: none !important;
     filter: none !important;
     transition: none !important;
-    transition-delay: 0s !important;
   }
+}
+
+input.phone-error {
+    border-color: red !important;
+    background-color: #fff0f0 !important;
 }

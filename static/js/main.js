@@ -1,36 +1,55 @@
 (function () {
-  // ---- Инициализация маски телефона ----
-  if (typeof Inputmask !== 'undefined') {
-    document.querySelectorAll('input[type="tel"]').forEach(input => {
+  function initPhoneMasks() {
+    const phoneInputs = document.querySelectorAll('input[type="tel"]');
+    if (typeof Inputmask === 'undefined') return;
+    phoneInputs.forEach(input => {
       Inputmask({
         mask: '+7 (999) 999-99-99',
+        clearMaskOnLostFocus: true,
+        clearIncomplete: true,
         showMaskOnHover: false,
         showMaskOnFocus: true,
-        clearIncomplete: true,
-        removeMaskOnSubmit: false,
-        placeholder: '_'
+        oncomplete: function () {
+          input.classList.remove('phone-error');
+          removePhoneErrorMessage(input);
+        },
+        onincomplete: function () {
+          input.classList.add('phone-error');
+          showPhoneErrorMessage(input, 'Введите полный номер телефона (10 цифр)');
+        }
       }).mask(input);
     });
   }
 
-  function normalizePhone(phone) {
-    if (!phone) return phone;
-    // Удаляем все нецифровые символы
-    let digits = phone.replace(/\D/g, '');
-    // Если номер начинается с 8, заменяем на 7
-    if (digits.startsWith('8')) {
-        digits = '7' + digits.slice(1);
+  function showPhoneErrorMessage(input, message) {
+    let errorDiv = input.parentNode.querySelector('.phone-error-message');
+    if (!errorDiv) {
+      errorDiv = document.createElement('div');
+      errorDiv.className = 'phone-error-message';
+      errorDiv.style.color = 'red';
+      errorDiv.style.fontSize = '12px';
+      errorDiv.style.marginTop = '4px';
+      input.parentNode.insertBefore(errorDiv, input.nextSibling);
     }
-    // Если номер начинается с 7 или 9 (без кода страны), добавляем +7
-    if (digits.length === 10 && (digits.startsWith('9') || digits.startsWith('7'))) {
-        digits = '7' + digits;
-    }
-    // Итоговый формат: +7XXXXXXXXXX
-    if (digits.length === 11 && digits.startsWith('7')) {
-        return '+' + digits;
-    }
-    return phone;
+    errorDiv.textContent = message;
   }
+
+  function removePhoneErrorMessage(input) {
+    const errorDiv = input.parentNode.querySelector('.phone-error-message');
+    if (errorDiv) errorDiv.remove();
+  }
+
+  function normalizePhone(phone) {
+    if (!phone) return null;
+    let digits = phone.replace(/\D/g, '');
+    if (digits.startsWith('8')) digits = '7' + digits.slice(1);
+    if (digits.length === 10) digits = '7' + digits;
+    if (digits.length === 11 && digits.startsWith('7')) return '+' + digits;
+    return null; // невалидный номер
+  }
+
+  // Вызываем инициализацию масок
+  initPhoneMasks();
 
   const navToggle = document.querySelector(".nav-toggle");
   const navPanel = document.querySelector(".site-header__nav");
@@ -788,9 +807,13 @@
       const formData = new FormData(form);
       const rawPhone = formData.get("phone");
       const phone = normalizePhone(rawPhone);
-      
-      if (!phone || phone.length !== 12) {
-        alert("Пожалуйста, введите корректный номер телефона");
+
+      if (!phone) {
+        const phoneInput = form.querySelector('[type="tel"]');
+        if (phoneInput) {
+          phoneInput.classList.add('phone-error');
+          showPhoneErrorMessage(phoneInput, 'Введите полный номер телефона (10 цифр)');
+        }
         return;
       }
 
@@ -803,16 +826,16 @@
         submitData.name = formData.get("name") || "";
         submitData.email = formData.get("email") || "";
         submitData.comment = formData.get("comment") || "";
-        
+
         const fileInput = form.querySelector('input[type="file"]');
         if (fileInput && fileInput.files && fileInput.files[0]) {
           try {
             if (submitBtn) submitBtn.disabled = true;
             const originalText = submitBtn ? submitBtn.textContent : "";
             if (submitBtn) submitBtn.textContent = "Загрузка файла...";
-            
+
             submitData.file_uuid = await uploadFile(fileInput.files[0]);
-            
+
             if (submitBtn) submitBtn.textContent = originalText;
           } catch (err) {
             alert("Ошибка при загрузке файла: " + err.message);
@@ -827,20 +850,20 @@
       try {
         if (submitBtn) submitBtn.disabled = true;
         const result = await submitLead(submitData);
-        
+
         alert("Заявка успешно отправлена!");
-        
+
         if (typeof ym !== 'undefined') {
-            if (submitData.form_type === 'small') {
-                ym(108573733, 'reachGoal', 'form_small');
-            } else if (submitData.form_type === 'large') {
-                ym(108573733, 'reachGoal', 'form_large');
-            }
-            ym(108573733, 'reachGoal', 'zayavka');
+          if (submitData.form_type === 'small') {
+            ym(108573733, 'reachGoal', 'form_small');
+          } else if (submitData.form_type === 'large') {
+            ym(108573733, 'reachGoal', 'form_large');
+          }
+          ym(108573733, 'reachGoal', 'zayavka');
         }
 
         form.reset();
-        
+
         // Сброс визуального состояния файла (если есть)
         const dropZone = form.querySelector(".modal-dlg__drop");
         if (dropZone) {
@@ -848,11 +871,11 @@
           const fileLabel = dropZone.querySelector(".modal-dlg__drop-file");
           if (fileLabel) fileLabel.textContent = "";
         }
-        
+
         // Закрытие модалки
         const dialog = form.closest("dialog");
         if (dialog) dialog.close();
-        
+
       } catch (err) {
         alert("Ошибка при отправке заявки: " + err.message);
       } finally {
