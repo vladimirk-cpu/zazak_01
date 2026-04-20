@@ -19,10 +19,15 @@ async def _get_drive_url(client: httpx.AsyncClient) -> Optional[str]:
     try:
         base_url = f"https://{settings.AMOCRM_SUBDOMAIN}.amocrm.ru"
         headers = {"Authorization": f"Bearer {settings.AMOCRM_LONG_TERM_TOKEN}"}
+        params = {"with": "drive_url"}
         
-        response = await client.get(f"{base_url}/api/v4/account?with=drive_url", headers=headers)
-        response.raise_for_status()
+        logger.info(f"Fetching drive_url from AmoCRM account settings...")
+        response = await client.get(f"{base_url}/api/v4/account", headers=headers, params=params)
         
+        if response.status_code != 200:
+            logger.error(f"Failed to get account info. Status: {response.status_code}, Response: {response.text}")
+            return None
+            
         data = response.json()
         drive_url = data.get("_embedded", {}).get("drive_url")
         
@@ -31,11 +36,12 @@ async def _get_drive_url(client: httpx.AsyncClient) -> Optional[str]:
             logger.info(f"AmoCRM drive_url obtained: {drive_url}")
             return drive_url
         else:
-            logger.error("AmoCRM response does not contain drive_url")
+            logger.error(f"AmoCRM response does not contain drive_url. Response keys: {list(data.keys())}")
+            # Это может указывать на отсутствие прав у токена
             return None
             
     except Exception as e:
-        logger.error(f"Failed to get AmoCRM drive_url: {e}")
+        logger.error(f"Error while getting AmoCRM drive_url: {e}")
         return None
 
 async def _upload_file_to_amo(client: httpx.AsyncClient, file_uuid: str) -> Optional[str]:
@@ -48,7 +54,7 @@ async def _upload_file_to_amo(client: httpx.AsyncClient, file_uuid: str) -> Opti
         matching_files = list(uploads_dir.glob(f"{file_uuid}_*"))
         
         if not matching_files:
-            logger.warning(f"File with UUID {file_uuid} not found locally")
+            logger.warning(f"File with UUID {file_uuid} not found locally in {uploads_dir}")
             return None
             
         file_path = matching_files[0]
@@ -58,10 +64,10 @@ async def _upload_file_to_amo(client: httpx.AsyncClient, file_uuid: str) -> Opti
         # 2. Получение drive_url
         drive_url = await _get_drive_url(client)
         if not drive_url:
+            logger.error("Skipping file upload because drive_url is missing")
             return None
 
         # 3. Создание сессии загрузки
-        # Запрос на создание сессии (обычно v1.0/sessions на drive_url)
         session_url = f"https://{drive_url}/v1.0/sessions"
         headers = {"Authorization": f"Bearer {settings.AMOCRM_LONG_TERM_TOKEN}"}
         session_payload = {
@@ -69,11 +75,11 @@ async def _upload_file_to_amo(client: httpx.AsyncClient, file_uuid: str) -> Opti
             "file_size": file_size
         }
         
-        logger.info(f"Creating AmoCRM upload session for {file_name} ({file_size} bytes)")
+        logger.info(f"Creating AmoCRM upload session: {file_name} ({file_size} bytes)")
         session_res = await client.post(session_url, headers=headers, json=session_payload)
         
         if session_res.status_code != 201:
-            logger.error(f"Failed to create AmoCRM upload session. Status: {session_res.status_code}, Response: {session_res.text}")
+            logger.error(f"Failed to create upload session. Status: {session_res.status_code}, Response: {session_res.text}")
             return None
             
         session_data = session_res.json()
@@ -83,18 +89,20 @@ async def _upload_file_to_amo(client: httpx.AsyncClient, file_uuid: str) -> Opti
             logger.error("AmoCRM session response does not contain upload_url")
             return None
 
-        # 4. Загрузка файла
-        # Используем отдельный запрос с увеличенным таймаутом
+        # 4. Загрузка файла (PUT)
         with open(file_path, "rb") as f:
             file_content = f.read()
             
-        logger.info(f"Uploading file content to {upload_url}")
-        # При загрузке на upload_url заголовки обычно не требуются те же, 
-        # но AmoCRM может требовать Authorization
-        upload_res = await client.post(upload_url, content=file_content, timeout=60.0)
+        logger.info(f"Uploading file binary to AmoCRM (PUT {upload_url})")
+        upload_headers = {"Content-Type": "application/octet-stream"}
+        # Согласно документации Drive API, для самого PUT запроса на upload_url 
+        # токен иногда не требуется, если он уже вшит в URL, но добавим для надежности если нужно.
+        # Однако пользователь просил именно Content-Type.
+        
+        upload_res = await client.put(upload_url, content=file_content, headers=upload_headers, timeout=60.0)
         
         if upload_res.status_code not in (200, 201):
-            logger.error(f"Failed to upload file content. Status: {upload_res.status_code}, Response: {upload_res.text}")
+            logger.error(f"Failed to upload binary data. Status: {upload_res.status_code}, Response: {upload_res.text}")
             return None
             
         upload_data = upload_res.json()
@@ -104,11 +112,11 @@ async def _upload_file_to_amo(client: httpx.AsyncClient, file_uuid: str) -> Opti
             logger.info(f"File uploaded successfully to AmoCRM. UUID: {amo_file_uuid}")
             return amo_file_uuid
         else:
-            logger.error("AmoCRM upload response does not contain uuid")
+            logger.error(f"AmoCRM upload response missing uuid. Response: {upload_data}")
             return None
 
     except Exception as e:
-        logger.error(f"Error during AmoCRM file upload: {e}")
+        logger.error(f"Error during AmoCRM file upload process: {e}")
         return None
 
 async def send_to_amocrm(lead_data: dict) -> tuple[bool, int | None]:
@@ -141,7 +149,7 @@ async def send_to_amocrm(lead_data: dict) -> tuple[bool, int | None]:
             if name:
                 custom_fields.append({"field_id": settings.AMOCRM_NAME_FIELD_ID, "values": [{"value": name}]})
             
-            # Важно: теги передаются как массив объектов
+            # Теги передаются как массив объектов (API v4)
             payload = [{
                 "name": f"Заявка с лендинга ({form_type})",
                 "pipeline_id": settings.AMOCRM_PIPELINE_ID,
@@ -163,12 +171,11 @@ async def send_to_amocrm(lead_data: dict) -> tuple[bool, int | None]:
 
         # 2. Загрузка и прикрепление файла (если есть)
         if file_uuid:
-            # Загрузка через Drive API
             amo_file_uuid = await _upload_file_to_amo(client, file_uuid)
             
             if amo_file_uuid:
                 try:
-                    # Прикрепление файла через примечание (Note)
+                    # Прикрепление файла к сделке через Note (тип file)
                     note_url = f"{base_url}/api/v4/leads/{lead_id}/notes"
                     note_payload = [
                         {
@@ -180,10 +187,10 @@ async def send_to_amocrm(lead_data: dict) -> tuple[bool, int | None]:
                     ]
                     note_res = await client.post(note_url, headers=headers, json=note_payload)
                     note_res.raise_for_status()
-                    logger.info(f"File {amo_file_uuid} successfully attached to lead {lead_id} via note")
+                    logger.info(f"File {amo_file_uuid} successfully attached to lead {lead_id}")
                 except Exception as e:
                     logger.error(f"Failed to attach file to lead {lead_id}: {e}")
             else:
-                logger.warning(f"File upload failed, lead {lead_id} created without attachment")
+                logger.warning(f"File attachment skipped for lead {lead_id} due to upload error")
 
         return True, lead_id
