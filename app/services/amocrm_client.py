@@ -68,7 +68,11 @@ async def _upload_file_to_amo(client: httpx.AsyncClient, file_uuid: str) -> Opti
             return None
 
         # 3. Создание сессии загрузки
-        session_url = f"https://{drive_url}/v1.0/sessions"
+        # drive_url уже содержит протокол (https://), поэтому добавляем только путь
+        if not (drive_url.startswith("http://") or drive_url.startswith("https://")):
+            drive_url = f"https://{drive_url}"
+            
+        session_url = f"{drive_url}/v1.0/sessions"
         headers = {"Authorization": f"Bearer {settings.AMOCRM_LONG_TERM_TOKEN}"}
         session_payload = {
             "file_name": file_name,
