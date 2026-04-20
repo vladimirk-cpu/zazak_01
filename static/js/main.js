@@ -854,7 +854,7 @@
             const originalText = submitBtn ? submitBtn.textContent : "";
             if (submitBtn) submitBtn.textContent = "Загрузка файла...";
 
-            submitData.file_uuid = await uploadFile(fileInput.files[0]);
+            submitData.file = await uploadFile(fileInput.files[0]);
 
             if (submitBtn) submitBtn.textContent = originalText;
           } catch (err) {
@@ -863,7 +863,7 @@
             return;
           }
         } else {
-          submitData.file_uuid = null;
+          submitData.file = null;
         }
       }
 

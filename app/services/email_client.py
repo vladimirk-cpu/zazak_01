@@ -22,8 +22,8 @@ async def send_email_notification(lead_data: dict) -> bool:
         else:
             body_lines.append(f"Телефон: {lead_data.get('phone', 'Не указан')}")
             
-        if lead_data.get('file_uuid'):
-            body_lines.append(f"Файл (UUID): {lead_data['file_uuid']}")
+        if lead_data.get('file'):
+            body_lines.append(f"Файл (UUID): {lead_data['file']}")
             
         msg.set_content("\n".join(body_lines))
 
