@@ -29,11 +29,11 @@ async def _get_drive_url(client: httpx.AsyncClient) -> Optional[str]:
             return None
             
         data = response.json()
-        drive_url = data.get("_embedded", {}).get("drive_url")
+        drive_url = data.get("drive_url")
         
         if drive_url:
             _DRIVE_URL_CACHE = drive_url
-            logger.info(f"AmoCRM drive_url obtained: {drive_url}")
+            logger.info(f"Drive URL: {drive_url}")
             return drive_url
         else:
             logger.error(f"AmoCRM response does not contain drive_url. Response keys: {list(data.keys())}")
@@ -109,7 +109,7 @@ async def _upload_file_to_amo(client: httpx.AsyncClient, file_uuid: str) -> Opti
         amo_file_uuid = upload_data.get("uuid")
         
         if amo_file_uuid:
-            logger.info(f"File uploaded successfully to AmoCRM. UUID: {amo_file_uuid}")
+            logger.info(f"File uploaded to Drive, UUID: {amo_file_uuid}")
             return amo_file_uuid
         else:
             logger.error(f"AmoCRM upload response missing uuid. Response: {upload_data}")
