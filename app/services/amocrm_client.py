@@ -37,7 +37,6 @@ async def _get_drive_url(client: httpx.AsyncClient) -> Optional[str]:
             return drive_url
         else:
             logger.error(f"AmoCRM response does not contain drive_url. Response keys: {list(data.keys())}")
-            # Это может указывать на отсутствие прав у токена
             return None
             
     except Exception as e:
@@ -64,11 +63,9 @@ async def _upload_file_to_amo(client: httpx.AsyncClient, file_uuid: str) -> Opti
         # 2. Получение drive_url
         drive_url = await _get_drive_url(client)
         if not drive_url:
-            logger.error("Skipping file upload because drive_url is missing")
             return None
 
         # 3. Создание сессии загрузки
-        # drive_url уже содержит протокол (https://), поэтому добавляем только путь
         if not (drive_url.startswith("http://") or drive_url.startswith("https://")):
             drive_url = f"https://{drive_url}"
             
@@ -87,26 +84,25 @@ async def _upload_file_to_amo(client: httpx.AsyncClient, file_uuid: str) -> Opti
             return None
             
         session_data = session_res.json()
-        upload_url = session_data.get("_links", {}).get("upload", {}).get("href")
+        # Пробуем оба варианта расположения ссылки
+        upload_url = session_data.get("upload_url") or session_data.get("_links", {}).get("upload", {}).get("href")
         
         if not upload_url:
-            logger.error("AmoCRM session response does not contain upload_url")
+            logger.error(f"AmoCRM session response missing upload_url. Data: {session_data}")
             return None
 
         # 4. Загрузка файла (PUT)
         with open(file_path, "rb") as f:
             file_content = f.read()
             
-        logger.info(f"Uploading file binary to AmoCRM (PUT {upload_url})")
+        logger.info(f"Uploading file to URL: {upload_url}")
         upload_headers = {"Content-Type": "application/octet-stream"}
-        # Согласно документации Drive API, для самого PUT запроса на upload_url 
-        # токен иногда не требуется, если он уже вшит в URL, но добавим для надежности если нужно.
-        # Однако пользователь просил именно Content-Type.
         
         upload_res = await client.put(upload_url, content=file_content, headers=upload_headers, timeout=60.0)
+        logger.info(f"File upload response: {upload_res.status_code}")
         
         if upload_res.status_code not in (200, 201):
-            logger.error(f"Failed to upload binary data. Status: {upload_res.status_code}, Response: {upload_res.text}")
+            logger.error(f"File upload failed: {upload_res.status_code} - {upload_res.text}")
             return None
             
         upload_data = upload_res.json()
@@ -134,7 +130,8 @@ async def send_to_amocrm(lead_data: dict) -> tuple[bool, int | None]:
     file_uuid = lead_data.get("file")
     form_type = lead_data.get("form_type", "unknown")
     
-    base_url = f"https://{settings.AMOCRM_SUBDOMAIN}.amocrm.ru"
+    subdomain = settings.AMOCRM_SUBDOMAIN
+    base_url = f"https://{subdomain}.amocrm.ru"
     headers = {
         "Authorization": f"Bearer {settings.AMOCRM_LONG_TERM_TOKEN}",
         "Content-Type": "application/json"
@@ -153,7 +150,6 @@ async def send_to_amocrm(lead_data: dict) -> tuple[bool, int | None]:
             if name:
                 custom_fields.append({"field_id": settings.AMOCRM_NAME_FIELD_ID, "values": [{"value": name}]})
             
-            # Теги передаются как массив объектов (API v4)
             payload = [{
                 "name": f"Заявка с лендинга ({form_type})",
                 "pipeline_id": settings.AMOCRM_PIPELINE_ID,
@@ -169,6 +165,14 @@ async def send_to_amocrm(lead_data: dict) -> tuple[bool, int | None]:
             lead_id = data['_embedded']['leads'][0]['id']
             logger.info(f"Lead created successfully in AmoCRM. ID: {lead_id}")
 
+            # Дублируем добавление тега отдельным запросом для гарантии (по просьбе пользователя)
+            try:
+                tag_payload = {"tags": [{"name": "Запрос с лендинга"}]}
+                await client.patch(f"{base_url}/api/v4/leads/{lead_id}", headers=headers, json=tag_payload)
+                logger.info(f"Tags updated for lead {lead_id}")
+            except Exception as e:
+                logger.warning(f"Failed to update tags separately for lead {lead_id}: {e}")
+
         except Exception as e:
             logger.error(f"Failed to create lead in AmoCRM: {e}")
             return False, None
@@ -179,7 +183,6 @@ async def send_to_amocrm(lead_data: dict) -> tuple[bool, int | None]:
             
             if amo_file_uuid:
                 try:
-                    # Прикрепление файла к сделке через Note (тип file)
                     note_url = f"{base_url}/api/v4/leads/{lead_id}/notes"
                     note_payload = [
                         {
@@ -191,7 +194,7 @@ async def send_to_amocrm(lead_data: dict) -> tuple[bool, int | None]:
                     ]
                     note_res = await client.post(note_url, headers=headers, json=note_payload)
                     note_res.raise_for_status()
-                    logger.info(f"File {amo_file_uuid} successfully attached to lead {lead_id}")
+                    logger.info(f"File attached to lead {lead_id}")
                 except Exception as e:
                     logger.error(f"Failed to attach file to lead {lead_id}: {e}")
             else:
