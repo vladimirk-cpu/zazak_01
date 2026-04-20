@@ -2423,3 +2423,11 @@ input.phone-error {
     border-color: red !important;
     background-color: #fff0f0 !important;
 }
+
+.partners-disclaimer {
+  margin-top: 16px;
+  font-size: 14px;
+  color: var(--color-text-muted);
+  text-align: right;
+  line-height: 1.4;
+}
