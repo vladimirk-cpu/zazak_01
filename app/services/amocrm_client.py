@@ -78,13 +78,14 @@ async def send_to_amocrm(lead_data: dict) -> tuple[bool, int | None]:
                         file_content = f.read()
                         
                     # Files API требует multipart/form-data
-                    # По заданию: POST /api/v4/files/upload
+                    # По заданию: POST /api/v4/files
                     files = {"file": (filename, file_content, "application/octet-stream")}
                     
                     # Примечание: Для загрузки файлов заголовки Content-Type не нужны (httpx выставит сам)
                     upload_headers = {"Authorization": f"Bearer {settings.AMOCRM_LONG_TERM_TOKEN}"}
                     
-                    upload_res = await client.post(f"{base_url}/api/v4/files/upload", headers=upload_headers, files=files)
+                    upload_res = await client.post(f"{base_url}/api/v4/files", headers=upload_headers, files=files)
+                    logger.info(f"AmoCRM file upload status: {upload_res.status_code}")
                     upload_res.raise_for_status()
                     
                     upload_data = upload_res.json()
