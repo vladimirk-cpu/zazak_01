@@ -20,6 +20,9 @@ class Settings(BaseSettings):
     AMOCRM_PIPELINE_ID: int = 0
     AMOCRM_STATUS_ID: int = 0
     AMOCRM_FORM_TYPE_FIELD_ID: int = 0
+    AMOCRM_PHONE_FIELD_ID: int = 0
+    AMOCRM_EMAIL_FIELD_ID: int = 0
+    AMOCRM_NAME_FIELD_ID: int = 0
 
     RECAPTCHA_SECRET_KEY: str = ""
     RATELIMIT_DEFAULT: str = "5/minute"
