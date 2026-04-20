@@ -66,7 +66,6 @@ async def _upload_file_to_amo(client: httpx.AsyncClient, file_uuid: str) -> Opti
             return None
 
         # 3. Создание сессии загрузки
-        # Убеждаемся, что drive_url имеет протокол
         if not (drive_url.startswith("http://") or drive_url.startswith("https://")):
             drive_url = f"https://{drive_url}"
             
@@ -147,12 +146,11 @@ async def send_to_amocrm(lead_data: dict) -> tuple[bool, int | None]:
             if name:
                 custom_fields.append({"field_id": settings.AMOCRM_NAME_FIELD_ID, "values": [{"value": name}]})
             
-            # Теги сразу в основном запросе
+            # В v4 для создания сделки не используем tags в основном запросе (по заданию)
             payload = [{
                 "name": f"Заявка с лендинга ({form_type})",
                 "pipeline_id": settings.AMOCRM_PIPELINE_ID,
                 "status_id": settings.AMOCRM_STATUS_ID,
-                "tags": [{"name": "Запрос с лендинга"}],
                 "custom_fields_values": custom_fields
             }]
 
@@ -162,6 +160,18 @@ async def send_to_amocrm(lead_data: dict) -> tuple[bool, int | None]:
             data = response.json()
             lead_id = data['_embedded']['leads'][0]['id']
             logger.info(f"Lead created in AmoCRM. ID: {lead_id}")
+
+            # Отдельное добавление тега по ID через PATCH
+            if settings.AMOCRM_TAG_ID != 0:
+                try:
+                    tag_payload = {"tags_to_add": [{"id": settings.AMOCRM_TAG_ID}]}
+                    tag_resp = await client.patch(f"{base_url}/api/v4/leads/{lead_id}", headers=headers, json=tag_payload)
+                    tag_resp.raise_for_status()
+                    logger.info(f"Tag {settings.AMOCRM_TAG_ID} added to lead {lead_id}")
+                except Exception as e:
+                    logger.error(f"Failed to add tag {settings.AMOCRM_TAG_ID} to lead {lead_id}: {e}")
+            else:
+                logger.warning("AMOCRM_TAG_ID is not set (0), skipping tag attachment")
 
         except Exception as e:
             logger.error(f"Failed to create lead in AmoCRM: {e}")
